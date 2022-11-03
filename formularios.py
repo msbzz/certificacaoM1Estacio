@@ -10,7 +10,7 @@ def cadastroFerramentas():
     master.title("---Ferramentas---")
     master.geometry('995x643+491+115')
     #master.wm_resizable(width=False,height=False)
-
+ 
     #imgLayout = PhotoImage(file='CADASTRO_FERRAMENTAS.png')
     imgLayout =None
 
