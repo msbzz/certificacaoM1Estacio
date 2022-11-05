@@ -4,6 +4,7 @@ from dadosXLSX import Dados
 
  
 def cadastroFerramentas():
+    
 
     def limparCampos():
          
@@ -106,6 +107,13 @@ def cadastroFerramentas():
     dadosCadastro=[] 
 
     #master.mainloop()
+
+def consultarFerramentas():
+    pass
+
+def listarFerramentas():
+    pass
+
 #cadastroFerramentas()
  
  
