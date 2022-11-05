@@ -1,20 +1,21 @@
-import tkinter as tk
+from tkinter import *
+
 from ferramentas import cadastroFerramentas,consultarFerramentas,listarFerramentas 
 from funcionarios import cadastroFuncionarios
 from solicitacoes import cadastroSolicitacoes
 
-master = tk.Tk()
+master =  Tk()
 master.title("---Controle de Ferramentas---")
 master.geometry('995x643+491+115')
 
-barraMenu = tk.Menu(master)
+barraMenu =  Menu(master)
 
 
-menuFerramentas=tk.Menu(barraMenu)
+menuFerramentas= Menu(barraMenu)
 
-menuFuncionarios=tk.Menu(barraMenu)
+menuFuncionarios= Menu(barraMenu)
 
-menuSolicitacoes=tk.Menu(barraMenu)
+menuSolicitacoes= Menu(barraMenu)
 
 menuFerramentas.add_command(label='Cadastrar Ferramentas',command=cadastroFerramentas)
 menuFerramentas.add_separator()
