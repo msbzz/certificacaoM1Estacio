@@ -23,7 +23,7 @@ menuFerramentas.add_command(label='Consultar Ferramentas',command=consultarFerra
 menuFerramentas.add_separator()
 menuFerramentas.add_command(label='listar Ferramentas',command=listarFerramentas)
 
-menuFuncionarios.add_command(label='Cadastrar Funcionários',command='')
+menuFuncionarios.add_command(label='Cadastrar Funcionários',command=cadastroFuncionarios)
 menuFuncionarios.add_separator()
 menuFuncionarios.add_command(label='Consultar Funcionário',command='')
 menuFuncionarios.add_separator()
