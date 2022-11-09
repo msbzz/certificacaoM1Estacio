@@ -1,98 +1,109 @@
+from tkinter import ttk
 from tkinter import *
-from openpyxl import load_workbook
 from dadosXLSX import Dados
 
-
-
-def cadastroFuncionarios():
-
-    # Funções
-    def cadastro():
-        book = load_workbook('Cadastro de técnicos.xlsx')
-        print(book.sheetnames)
-
-        # Selecionar a página do exel
-        nome_do_tecnico_pagina = book['Nome']
-        cpf_pagina = book['CPF']
-        telefone_pagina = book['Telefone']
-        turno_pagina = book['Turno']
-        nome_da_equipe_pagina = book['NomeEquipe']
-
-        # Adicionar elementos na página
-
-
-
-        nome_do_tecnico_pagina.append([nome_do_tecnico.get()])
-        cpf_pagina.append([cpf.get()])
-        telefone_pagina.append([telefone.get()])
-        turno_pagina.append([turno.get()])
-        nome_da_equipe_pagina.append([nome_da_equipe.get()])
-        book.save('Cadastro de técnicos.xlsx')
-
-        master.destroy()
+ 
+def cadastroFuncionaros():
     
+    cData=Dados()
 
-    def retorno():
+    def limparCampos():
+         
+        _snome.set('')
+        _scpf.set('')
+        _stelefone.set('')
+        _sturno.set('')
+        _snome_equipe.set('')
+       
 
-        master.destroy()
+    def salvar():
 
-    def click_mouse(retorno):
-           print(retorno)
-           print(f'x : {retorno.x} | y : {retorno.y} | geo : {master.geometry()}')
+        dadosCadastro=[
+                _snome.get(),
+                _scpf.get(),
+                _stelefone.get(),
+                _sturno.get(),
+                _snome_equipe.get(),
+                ]
+         
+         
+        cData.createInsertXLSX('lista_de_tecnicos.xlsx','tecnicos',dadosCadastro)
+        limparCampos()
 
-    #AKI SEU CODIGO
-
+    #AKI PRODUCAO 
     master =  Toplevel()
-    #master = Tk()
-    master.title("***Cadastro do colaborador****")
-    master.iconbitmap(default="")#trocar o ícone
-    master.geometry("1200x870+352+79") # Largura x Altura + dist esquerda + dist topo
-    #900x600+591+215  
-    master.resizable(width=1, height=1)
+    #AKI DEBUG
+    master = Tk()
 
+    #LABELS e ENTRYS
+    nIPADY=8 
+    nPADY=8
+    
+    master.title("---Cadastro de técnicos---")
+    master.geometry('900x600+591+215')
+    master.wm_resizable(width=False,height=False)
 
-    #Importar imagens
-    img_principal = PhotoImage(file="img_cadastro_colaboradores.png")
-    img_cadastrar = PhotoImage(file="")#botao_cadastrar.png
-    img_retornar = PhotoImage(file="") #botao_retornar.png
+    nomePlanilhaDeListas='listaTurno.xlsx'
 
-    # funções
-    # Função para saber as coordenandas dos botões e o tamanho da tela principal
-    #def clique_esq_mouse(retorno):
-    #    print(f'x: {retorno.x} | y: {retorno.y} Geo: {master.geometry()}')
+    #FRAME3 / TITULO
+    frame1=Frame(master,width=900,height=100)#,bg='green' 
+    frame1.grid(row=0,column=0,columnspan=3,sticky='nsew')
+    lblTit=Label(frame1, text="CADASTRO DE TÉCNICOS", font= ("Calibri",16))
+    lblTit.pack(fill='both',pady=40,padx=300)  
+     
+    #FRAME3 / LABELS------------------------
+    frame2=Frame(master,width=300,height=500)# 
+    frame2.grid(row=1,column=0,sticky='nsew')
 
-    # Criação de Labels
-    lab_principal = Label(master, image=img_principal)
-    lab_principal.place(x=0, y=0)
-    lab_principal.pack()
+    Label(frame2, text="NOME COMPLETO", font=("Calibri", 12)).pack(fill='both',ipady=nIPADY) 
+    Label (frame2, text="CPF", font=("Calibri", 12)).pack(fill='x',ipady=nIPADY) 
+    #combo box Fabricante
+    Label ( frame2, text="TELEFONE", font=("Calibri", 12)).pack(fill='x',ipady=nIPADY) 
+    Label ( frame2, text="TURNO", font=("Calibri", 12)).pack(fill='x',ipady=nIPADY)
+    Label ( frame2, text="NOME DA EQUIPE", font=("Calibri", 12)).pack(fill='x',ipady=nIPADY)
 
-    # Criação de caixas de entrada
-    nome_do_tecnico = Entry(master , bd=2 , font=("Calibri",15) , justify=CENTER)
-    nome_do_tecnico.place(width=584 , height=34, x=438 , y=206)
+   
+    #FRAME3 / ENTRY------------------------
+    frame3=Frame(master,width=300,height=500)#,bg='white' 
+    frame3.grid(row=1,column=1,sticky='nsew')
+   
+    _snome=StringVar() 
+    Entry(frame3,bd=2,font=('Calibri',12),textvariable=_snome).pack(fill='both',pady=nPADY)
 
-    cpf = Entry(master , bd=2 , font=("Calibri",15) , justify=CENTER)
-    cpf.place(width=584 , height=36 , x=438 , y=300)
+    _scpf=StringVar()
+    Entry(frame3,bd=2,font=('Calibri',12),textvariable=_scpf).pack(fill='both',pady=nPADY)
 
-    telefone = Entry(master , bd=2 , font=("Calibri",15) , justify=CENTER)
-    telefone.place(width=584 , height=36 , x=438 , y=390)
+    _stelefone=StringVar()
+    Entry(frame3,bd=2,font=('Calibri',12),textvariable=_stelefone).pack(fill='both',pady=nPADY)
 
-    turno = Entry(master , bd=2 , font=("Calibri",15) , justify=CENTER)
-    turno.place(width=584 , height=36 , x=438 , y=481)
+    # get lista Turnos
+    lst=cData.getList(nomePlanilhaDeListas,'turno')
+    _sturno=StringVar()
+    ttk.Combobox ( frame3,value=lst,font=("Calibri", 12),width=19,textvariable=_sturno).pack(fill='both',pady=nPADY)
 
-    nome_da_equipe = Entry(master , bd=2 , font=("Calibri",15) , justify=CENTER)
-    nome_da_equipe.place(width=584 , height=36 , x=438 , y=565)
+    _snome_equipe=StringVar()
+    Entry(frame3,bd=2,font=('Calibri',12),textvariable=_snome_equipe).pack(fill='both',pady=nPADY)
+    
+   
 
-    # Criação de Botões
-    cadastrar = Button(master ,text="confimar", width=16, height=2, bg="orange" , command = cadastro )
-    cadastrar.place(x=700 , y=814)
-    #place(width=340, height=100 , x=50 , y=695)
-    retornar = Button(master ,text="retornar",  width=16, height=2, bg="orange" , command = retorno)
-    retornar.place(x=948 , y=814)
-    #place(width=166, height=49 , x=450 , y=769)
-    #eventos
-    master.bind("<Button-1>",click_mouse)
-    # Salvar a planilha
+    #FRAME4 / NECESSÁRIO PARA EQUILIBRAR------------------------
+    frame4=Frame(master,width=300,height=500)#,bg='yellow' 
+    frame4.grid(row=1,column=2)    
 
+    #dadosCadastro=[] 
+
+    Button(master, text="Confimar", width=16, height=2, bg="orange",command=salvar).place(x=509, y=544)
+    Button(master, text="Retornar", width=16, height=2, bg="orange",command=master.destroy ).place(x=696, y=544)
+     
+    #AKI DEBUG
     #master.mainloop()
 
-#cadastroFuncionarios()
+def consultarFerramentas():
+    pass
+
+def listarFerramentas():
+    pass
+
+#AKI DEBUG
+#cadastroFuncionaros()
+ 
