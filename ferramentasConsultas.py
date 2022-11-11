@@ -249,6 +249,9 @@ def consultarFerramentas():
     Button(frame4, text='detalhe', command=lambda:callDetFerramenta(), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
 
+    Button(frame4, text='listar', command='', bg=bgColorbtn,
+           fg=forecolorBtn, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn          
+
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
 
     Button(master, text="retornar", width=16, height=2, bg=bgColorbtn,
