@@ -3,7 +3,7 @@ from tkinter import *
 from dadosXLSX import Dados
 
  
-def cadastroFuncionaros():
+def cadastroFuncionarios():
     
     cData=Dados()
 
