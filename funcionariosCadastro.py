@@ -27,7 +27,7 @@ def cadastroFuncionarios():
                 ]
          
          
-        cData.createInsertXLSX('lista_de_tecnicos.xlsx','tecnicos',dadosCadastro)
+        cData.createInsertXLSX('funcionarios.xlsx','tecnicos',dadosCadastro)
         limparCampos()
 
     #AKI PRODUCAO 
