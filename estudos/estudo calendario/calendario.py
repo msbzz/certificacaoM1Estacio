@@ -20,11 +20,11 @@ def calendar():
    my_buttonOk= Button(master,text='Confirm',command='')
    my_buttonOk.pack(pady=20)
 
-   my_buttonReturn= Button(master,text='Return',command='')
+   my_buttonReturn = Button(master, text='Return', command='')
    my_buttonReturn.pack(pady=20)
 
-   my_label=Label(master,text='')
-   my_label.pack(pady=20)   
+   my_label = Label(master, text='')
+   my_label.pack(pady=20)
    
    master.mainloop()
 
