@@ -69,25 +69,27 @@ class Dados():
         nCols=len(lsCab)
 
         lsReturn = []
-
-        #REDUZIR O NUMERO DE LINHAS DO GRID / para testar retorno usa max_row=1
-        for rows in infoCells.iter_rows(min_row=1):
+        try:
+           #REDUZIR O NUMERO DE LINHAS DO GRID / para testar retorno usa max_row=1
+           #min_row=1
+           for rows in infoCells.iter_rows():
             
-            ls=''
+               ls=''
              
-            for i in range(0,nCols):
-                  if (len(ls)>0):
-                     ls+= ','+rows[i].value
-                  else:
-                     ls= rows[i].value 
+               for i in range(0,nCols):
+                   if (len(ls)>0):
+                      ls+= ','+rows[i].value
+                   else:
+                      ls= rows[i].value 
 
-            if (rows[0].value!=None):
-               lsReturn.append(ls.upper())
-            else: 
-               break
+               if (rows[0].value!=None):
+                  lsReturn.append(ls.upper())
+               else: 
+                  break
 
-            #print('dados ========>>>>>',ls.split(','))
-
+               #print('dados ========>>>>>',ls.split(','))
+        except:
+            pass 
         return lsReturn     
 
     def getList(self, nome_e_Extensao, nomePlanilha):
@@ -140,12 +142,15 @@ class Dados():
         
         ls=[]
         sTemp=''
-        arquivoTemp=open('newfileLista.txt','r')
-        for line in arquivoTemp.readlines():
-            sTemp=line[:-1]
-            ls.append(sTemp)
+        try:
+           arquivoTemp=open('newfileLista.txt','r')
+           for line in arquivoTemp.readlines():
+               sTemp=line[:-1]
+               ls.append(sTemp)
         
-        arquivoTemp.close()
-
+           arquivoTemp.close()
+        except:
+            pass
+        
         return(ls)
 

@@ -43,7 +43,7 @@ def cadastroFuncionarios():
     master.geometry('900x600+591+215')
     master.wm_resizable(width=False,height=False)
 
-    nomePlanilhaDeListas='listaTurno.xlsx'
+    nomePlanilhaDeListas='listasFuncionarios.xlsx'
 
     #FRAME3 / TITULO
     frame1=Frame(master,width=900,height=100)#,bg='green' 
@@ -81,9 +81,14 @@ def cadastroFuncionarios():
     _sturno=StringVar()
     ttk.Combobox ( frame3,value=lst,font=("Calibri", 12),width=19,textvariable=_sturno).pack(fill='both',pady=nPADY)
 
+    #_snome_equipe=StringVar()
+    #Entry(frame3,bd=2,font=('Calibri',12),textvariable=_snome_equipe).pack(fill='both',pady=nPADY)
+
+    # get lista equipes
+    lst=cData.getList(nomePlanilhaDeListas,'equipes')
     _snome_equipe=StringVar()
-    Entry(frame3,bd=2,font=('Calibri',12),textvariable=_snome_equipe).pack(fill='both',pady=nPADY)
-    
+    ttk.Combobox ( frame3,value=lst,font=("Calibri", 12),width=19,textvariable=_snome_equipe).pack(fill='both',pady=nPADY)
+
    
 
     #FRAME4 / NECESSÁRIO PARA EQUILIBRAR------------------------
@@ -98,12 +103,7 @@ def cadastroFuncionarios():
     #AKI DEBUG
     #master.mainloop()
 
-def consultarFerramentas():
-    pass
-
-def listarFerramentas():
-    pass
-
+ 
 #AKI DEBUG
 #cadastroFuncionaros()
  
