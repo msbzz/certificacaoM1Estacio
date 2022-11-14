@@ -12,7 +12,8 @@ def detalheFuncionario():
 
     print('lsDetalhe ------>>', lsDetalhe)
     # APENAS DEBUG
-    #lsDetalhe=['MMEI-W45', 'FERRAMENTA2', 'BOSCH', '220', 'DIEOW-3', '44X9', 'PESAGEM', 'CHAVE PHILLIPS', 'AÇO RÁPIDO']
+    # AKI DEBUG
+    #lsDetalhe=['FULANO SILVA', '(21)99212912', '890.332.121.98', 'NOITE', 'BALADA']
 
     # AKI PRODUCAO
     master_ch = Toplevel()
@@ -41,7 +42,7 @@ def detalheFuncionario():
     frame1 = Frame(master_ch, width=900, height=100)  # ,bg='green'
     frame1.grid(row=0, column=0, columnspan=3, sticky='nsew')
 
-    lblTit = Label(frame1, text="DETALHE SOLICITAÇÃO", font=("Calibri", 16))
+    lblTit = Label(frame1, text="DETALHE FUNCIONÁRIO", font=("Calibri", 16))
     lblTit.grid(row=0, column=0, pady=40, padx=300)
 
     # FRAME2 / LABELS------------------------
@@ -50,155 +51,75 @@ def detalheFuncionario():
 
     # essa dicionario serve apenas para saber o indice
     dadosDetalhe = {
-        'cpf': 0,
-        'nome': 1,
-        'equipe': 2,
-        'codigo da ferramenta': 3,
-        'data saida': 4,
-        'hora saida': 5,
-        'data devolução': 6,
-        'hora devolução': 7,
-        'motivo': 8
-    }
+        'nome': 0,
+        'cpf': 1,
+        'telefone': 2,
+        'turno': 3,
+        'equipe': 4 
+     }
 
     # PONTO DE CONFIGURAÇÃO / LABELs CONSULTA DETALHE
 
-    # CPF caption
-    Label(frame2, text="CPF", font=(
+    # NOME caption
+    Label(frame2, text="NOME", font=(
         "Calibri", 12), width=nWcaption).grid(row=linElementos,
                                               column=0, ipady=nIPADY, padx=nIPADX)
 
-    # CPF info
+    # NOME info
     Label(frame2, text=lsDetalhe[0], relief=SUNKEN, width=nWinfo,
           font=("Calibri", 12)).grid(row=linElementos,
                                      column=1, pady=nPADY,
                                      padx=nPADX)
 
-    # reserva
-    """
-    NÃO CONSEGUI ENTENDER PORQUE NÃO FUNCIONA
-    VAI LABEL MESMO !!!
-
-    _sReservado = StringVar()
-    chkReserva = IntVar()
-    
-     
-    def atualizaCheck():
-       if lsDetalhe[9] == 'SIM':
-           chkReserva.set(1)
-       else:
-           chkReserva.set(0)
  
-    Checkbutton(frame2, text='RESERVA', font=('Calibri', 12), variable=chkReserva, 
-                             onvalue=1, 
-                             offvalue=1, command='').grid(row=linElementos, 
-                             column=2,
-                             pady=nPADY, padx=nPADX)
-    #atualizaCheck()                         
-    """
-    # NOME caption
-    Label(frame2, text="NOME", font=(
+    # CPF label
+    Label(frame2, text="CPF", font=(
         "Calibri", 12), width=nWcaption).grid(row=linElementos+1,
                                               column=0, ipady=nIPADY, padx=nIPADX)
 
-    # NOME info
+    # CPF info
     Label(frame2, text=lsDetalhe[1], relief=SUNKEN, font=(
         "Calibri", 12), width=nWinfo).grid(row=linElementos+1, column=1,
                                            pady=nPADY, padx=nPADX)
 
-    # EQUIPE label
-    Label(frame2, text="EQUIPE", font=(
+    # TELEFONE label
+    Label(frame2, text="TELEFONE", font=(
         "Calibri", 12), width=nWcaption).grid(row=linElementos+2,
                                               column=0, ipady=nIPADY,
                                               padx=nIPADX)
 
-    # EQUIPE info
+    # CPF TELEFONE
     Label(frame2, text=lsDetalhe[2], relief=SUNKEN, font=(
         "Calibri", 12), width=nWinfo).grid(row=linElementos+2,
                                            column=1, pady=nPADY, padx=nPADX)
 
-    # CODIGO DA FERRAMENTA caption
-    Label(frame2, text="CODIGO DA FERRAMENTA", font=(
+    # TURNO label
+    Label(frame2, text="TELEFONE", font=(
         "Calibri", 12), width=nWcaption).grid(row=linElementos+3,
                                               column=0, ipady=nIPADY,
                                               padx=nIPADX)
 
-    # CODIGO DA FERRAMENTA info
+    # TURNO info
     Label(frame2, text=lsDetalhe[3], relief=SUNKEN,
           font=("Calibri", 12), width=nWinfo).grid(row=linElementos+3,
                                                    column=1,
                                                    pady=nPADY,
                                                    padx=nPADX)
 
-    # DATA SAIDA caption
-    Label(frame2, text="DATA DA SAIDA", font=(
+    # EQUIPE label
+    Label(frame2, text="TURNO", font=(
         "Calibri", 12), width=nWcaption).grid(row=linElementos+4,
                                               column=0,
                                               ipady=nIPADY,
                                               padx=nIPADX)
 
-    # DATA SAIDA info
+    # EQUIPE info
     Label(frame2, text=lsDetalhe[4], relief=SUNKEN, font=(
         "Calibri", 12), width=nWinfo).grid(row=linElementos+4,
                                            column=1,
                                            pady=nPADY,
                                            padx=nPADX)
-    # HORA SAIDA caption
-    Label(frame2, text="HORA DA SAIDA",
-          font=("Calibri", 12), width=nWcaption).grid(row=linElementos+5,
-                                                      column=0, ipady=nIPADY,
-                                                      padx=nIPADX)
-
-    # HORA SAIDA info
-    Label(frame2, text=lsDetalhe[5], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+5,
-                                           column=1,
-                                           pady=nPADY,
-                                           padx=nPADX)
-
-    # DATA DEVOLUÇÃO captin
-    Label(frame2, text="DATA DA DEVOLUÇÃO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+6, column=0,
-                                              ipady=nIPADY, padx=nIPADX)
-
-    # DATA DEVOLUÇÃO info
-    Label(frame2, text=lsDetalhe[6], relief=SUNKEN,
-          font=("Calibri", 12), width=nWinfo).grid(row=linElementos+6,
-                                                   column=1, pady=nPADY, padx=nPADX)
-
-    # HORA DEVOLUÇÃO caption
-    Label(frame2, text="HORA DA DEVOLUÇÃO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+7, column=0,
-                                              ipady=nIPADY, padx=nIPADX)
-
-    # HORA DEVOLUÇÃO info
-    Label(frame2, text=lsDetalhe[7], relief=SUNKEN,
-          font=("Calibri", 12), width=nWinfo).grid(row=linElementos+7,
-                                                   column=1, pady=nPADY,
-                                                   padx=nPADX)
-
-    # MOTIVO caption
-    Label(frame2, text="MOTIVO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+8, column=0, ipady=nIPADY, padx=nIPADX)
-
-    # MOTIVO info
-    Label(frame2, text=lsDetalhe[8], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+8,
-                                           column=1,
-                                           pady=nPADY,
-                                           padx=nPADX)
-
-    # RESERVADO caption
-    Label(frame2, text="RESERVADO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+9, column=0, ipady=nIPADY, padx=nIPADX)
-
-    # RESERVADO  info
-    Label(frame2, text=lsDetalhe[9], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+9,
-                                           column=1,
-                                           pady=nPADY,
-                                           padx=nPADX)
-
+ 
     # FRAME3 / INFO------------------------
     # frame3 = Frame(master_ch, width=300, height=500)  # ,bg='white'
     #frame3.grid(row=1, column=1, sticky='nsew')
@@ -207,7 +128,7 @@ def detalheFuncionario():
            bg="orange", command=master_ch.destroy).place(x=696, y=544)
 
     # AKI DEBUG
-    # master_ch.mainloop()
+    #master_ch.mainloop()
 # AKI DEBUG
-# detalheConsulta()
-# consultarSolicitacoes()
+#detalheFuncionario()
+ 

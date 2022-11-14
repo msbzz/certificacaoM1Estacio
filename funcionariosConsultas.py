@@ -15,34 +15,33 @@ def consultarFuncionarios():
 
     # PONTO DE CONFIGURAÇÃO / CABEÇARIO DO TREEVIEW
     Cab = [
-        'Cpf',
         'Nome',
-        'Equipe',
-        'Cod. Ferr.',
-        'Dt. saida',
-        'Hra. saida',
-        'Dt. devol',
-        'Hra. devol',
-        'Motivo',
-        'Reservada'
+        'Cpf',
+        'Telefone',
+        'Turno.',
+        'Equipe'
     ]
 
     # PONTO DE CONFIGURAÇÃO / INDICES DOS FILTROS / 1
-    listaFiltros = {'nome': 1, 'equipe': 2, 'codFerramenta': 3, 'reservada': 9}
+    listaFiltros = {'nome': 0, 'cpf': 1, 'turno': 3, 'equipe': 4}
 
     # FUNÇÃO DE FILTROS
     # função usada dentro da CARGATREEVIEW
+
+    # PONTO DE CONFIGURAÇÃO FILTRO
+    def limparFiltros():
+        _sNome.set('')
+        _sCpf.set('')
+        _sTurno.set('')
+        _sEquipe.set('')
 
     def getFilterTreeView(listaTodos):
         def contains(s, other):
             return s.__contains__(other)
 
-        # PONTO DE CONFIGURAÇÃO FILTRO
-        def limparFiltros():
-            _sNome.set('')
-            _sEquipe.set('')
-            _sCodFerramenta.set('')
-            _sReservada.set('')
+
+        
+            
 
         def getFilter(lsTodos, conteudo, indice):
             lsFilter = []
@@ -62,33 +61,33 @@ def consultarFuncionarios():
 
         # PONTO DE CONFIGURAÇÃO FILTRO
         nome = _sNome.get().upper()
+        cpf = _sCpf.get().upper()
+        turno = _sTurno.get().upper()
         equipe = _sEquipe.get().upper()
-        codFerramenta = _sCodFerramenta.get().upper()
-        reservada = _sReservada.get().upper()
         # PONTO DE CONFIGURAÇÃO / INDICES DOS FILTROS / 1
         if nome != '':
             #print('tulipa ------',listaFiltros['codigo'])
             lsReturnAll = getFilter(listaTodos, nome, listaFiltros['nome'])
 
         if len(lsReturnAll) == 0:
-            lsReturnAll = getFilter(listaTodos, equipe, listaFiltros['equipe'])
+            lsReturnAll = getFilter(listaTodos, cpf, listaFiltros['cpf'])
         else:
             lsReturnAll = getFilter(
-                lsReturnAll, equipe, listaFiltros['equipe'])
+                lsReturnAll, equipe, listaFiltros['cpf'])
 
         if len(lsReturnAll) == 0:
             lsReturnAll = getFilter(
-                listaTodos, codFerramenta, listaFiltros['codFerramenta'])
+                listaTodos, turno, listaFiltros['turno'])
         else:
             lsReturnAll = getFilter(
-                lsReturnAll, codFerramenta, listaFiltros['codFerramenta'])
+                lsReturnAll, turno, listaFiltros['turno'])
         
         if len(lsReturnAll) == 0:
                 lsReturnAll = getFilter(
-                listaTodos, reservada, listaFiltros['reservada'])
+                listaTodos, equipe, listaFiltros['equipe'])
         else:
             lsReturnAll = getFilter(
-                lsReturnAll, reservada, listaFiltros['reservada'])
+                lsReturnAll, equipe, listaFiltros['equipe'])
         return lsReturnAll
 
     # ROTINAS DE TREEVIEW
@@ -108,8 +107,10 @@ def consultarFuncionarios():
         # caso contrario usa a lista do filtro
         if filtro == False:
             lsLocal = ls
+            limparFiltros()
         else:
             lsLocal = getFilterTreeView(ls)
+            
         #print('carga tree <<==>>>',lsLocal)
 
         if (len(ls) > 0):
@@ -179,7 +180,7 @@ def consultarFuncionarios():
     master.wm_resizable(width=False, height=False)
 
     # Nome planilha'
-    nomePlanilhaDeConsulta = 'solicitacoes.xlsx'
+    nomePlanilhaDeConsulta = 'funcionarios.xlsx'
 
     #FRAME1 / ESPAÇAMENTO
     frame1 = Frame(master, width=900, bg=bgColor)  # ,bg='green'
@@ -199,30 +200,30 @@ def consultarFuncionarios():
 
     # AKI CONFIGURAÇÂO LABELS FILTROS
     Label(frame2, text="Nome", bg=bgColor, fg='green').grid(row=0, column=0)
-    Label(frame2, text="Equipe", bg=bgColor, fg='green').grid(row=0, column=1)
-    Label(frame2, text="Cod. da ferr.", bg=bgColor,
+    Label(frame2, text="Cpf", bg=bgColor, fg='green').grid(row=0, column=1)
+    Label(frame2, text="Turno", bg=bgColor,
           fg='green').grid(row=0, column=2)
-    Label(frame2, text="Reservada(S/N).", bg=bgColor,
+    Label(frame2, text="Equipe", bg=bgColor,
           fg='green').grid(row=0, column=3)
 
     # PONTO DE CONFIGURAÇÃO VARs ENTRIES FILTROS // use 2
     _sNome = StringVar()
+    _sCpf = StringVar()
+    _sTurno = StringVar()
     _sEquipe = StringVar()
-    _sCodFerramenta = StringVar()
-    _sReservada = StringVar()
 
     # PONTO DE CONFIGURAÇÃO ENTRIES FILTROS
     Entry(frame2, textvariable=_sNome).grid(row=1, column=0, padx=3)
-    Entry(frame2, textvariable=_sEquipe).grid(row=1, column=1, padx=3)
-    Entry(frame2, textvariable=_sCodFerramenta).grid(row=1, column=2, padx=3)
-    Entry(frame2, textvariable=_sReservada).grid(row=1, column=3, padx=3)
+    Entry(frame2, textvariable=_sCpf).grid(row=1, column=1, padx=3)
+    Entry(frame2, textvariable=_sTurno).grid(row=1, column=2, padx=3)
+    Entry(frame2, textvariable=_sEquipe).grid(row=1, column=3, padx=3)
 
-    # CARGA DADOS DA PLANILHA EM FUNÇÃO DOS CABs FORNECIDOS NA LISTA
-    lsDados = cDados.OpenReadXLSX(nomePlanilhaDeConsulta, 'solicitacoes', Cab)
+    # CONFIG AKI / CARGA DADOS DA PLANILHA EM FUNÇÃO DOS CABs FORNECIDOS NA LISTA
+    lsDados = cDados.OpenReadXLSX(nomePlanilhaDeConsulta, 'tecnicos', Cab)
     print('cont row ==>', len(lsDados))
 
     # BTNs FILTROS
-    Button(frame2, text='consultar', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
            command=lambda: cargaTreeView(lsDados, True)).grid(row=1, column=4, padx=10)
 
     Button(frame2, text='refresh', bg=bgColorbtn, fg=forecolorBtn,
@@ -237,7 +238,7 @@ def consultarFuncionarios():
     tv.bind('<ButtonRelease-1>', obterLinhaTv)  # <Double-1>
 
     for item in Cab:
-        tv.column(item, minwidth=0, width=100)
+        tv.column(item, minwidth=0, width=200)
         tv.heading(item, text=item)
 
     cargaTreeView(lsDados)
@@ -262,5 +263,7 @@ def consultarFuncionarios():
            fg=forecolorBtn, 
            command=lambda: sairDetalhe()).place(x=800, y=544)
     # AKI DEBUG
-    master.mainloop()
+    #master.mainloop()
 
+# AKI DEBUG
+#consultarFuncionarios()

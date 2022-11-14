@@ -29,6 +29,13 @@ def consultarFerramentas():
     #PONTO DE CONFIGURAÇÃO / INDICES DOS FILTROS
     listaFiltros = {'codigo': 0 , 'descricao':1, 'fabricante':2, 'material':8}
 
+    #PONTO DE CONFIGURAÇÃO FILTRO
+    def limparFiltros():  
+        _scodigo.set('')      
+        _sdescricao.set('')
+        _sfabricante.set('')
+        _smaterial.set('')
+
 
     # FUNÇÃO DE FILTROS
     # função usada dentro da CARGATREEVIEW
@@ -36,12 +43,7 @@ def consultarFerramentas():
         def contains(s, other):
            return s.__contains__(other)
         
-        #PONTO DE CONFIGURAÇÃO FILTRO
-        def limparFiltros():  
-           _scodigo.set('')      
-           _sdescricao.set('')
-           _sfabricante.set('')
-           _smaterial.set('')
+
         
         def getFilter(lsTodos,conteudo,indice):
             lsFilter=[]
@@ -103,9 +105,11 @@ def consultarFerramentas():
         #carrega a lista vinda da planilha
         #caso contrario usa a lista do filtro
         if filtro==False:
-           lsLocal=ls 
+           lsLocal=ls
+           limparFiltros() 
         else:  
            lsLocal=getFilterTreeView(ls)
+           
         #print('carga tree <<==>>>',lsLocal)
 
         if (len(ls)>0): 
@@ -166,7 +170,7 @@ def consultarFerramentas():
     #master = Tk()
 
     master.configure(bg=bgColor)
-    master.title("---Ferramentas---")
+    #master.title("---Ferramentas---")
     master.geometry('900x600+591+215')
     
     photo = PhotoImage(file = 'imagens/toolsIco-48.png')   
@@ -222,7 +226,7 @@ def consultarFerramentas():
 
 
     #BTNs FILTROS
-    Button(frame2, text='consultar', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
            command=lambda:cargaTreeView(lsDados,True)).grid(row=1, column=4, padx=10)
 
     Button(frame2, text='refresh', bg=bgColorbtn, fg=forecolorBtn,

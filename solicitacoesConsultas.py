@@ -30,6 +30,16 @@ def consultarSolicitacoes():
     # PONTO DE CONFIGURAÇÃO / INDICES DOS FILTROS / 1
     listaFiltros = {'nome': 1, 'equipe': 2, 'codFerramenta': 3, 'reservada': 9}
 
+
+    # PONTO DE CONFIGURAÇÃO FILTRO
+    def limparFiltros():
+        _sNome.set('')
+        _sEquipe.set('')
+        _sCodFerramenta.set('')
+        _sReservada.set('')
+
+
+
     # FUNÇÃO DE FILTROS
     # função usada dentro da CARGATREEVIEW
 
@@ -37,12 +47,6 @@ def consultarSolicitacoes():
         def contains(s, other):
             return s.__contains__(other)
 
-        # PONTO DE CONFIGURAÇÃO FILTRO
-        def limparFiltros():
-            _sNome.set('')
-            _sEquipe.set('')
-            _sCodFerramenta.set('')
-            _sReservada.set('')
 
         def getFilter(lsTodos, conteudo, indice):
             lsFilter = []
@@ -108,8 +112,10 @@ def consultarSolicitacoes():
         # caso contrario usa a lista do filtro
         if filtro == False:
             lsLocal = ls
+            limparFiltros()
         else:
             lsLocal = getFilterTreeView(ls)
+            
         #print('carga tree <<==>>>',lsLocal)
 
         if (len(ls) > 0):
@@ -222,7 +228,7 @@ def consultarSolicitacoes():
     print('cont row ==>', len(lsDados))
 
     # BTNs FILTROS
-    Button(frame2, text='consultar', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
            command=lambda: cargaTreeView(lsDados, True)).grid(row=1, column=4, padx=10)
 
     Button(frame2, text='refresh', bg=bgColorbtn, fg=forecolorBtn,
