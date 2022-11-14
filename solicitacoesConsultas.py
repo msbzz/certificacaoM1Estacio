@@ -8,7 +8,6 @@ from solicitacoesDetalhe import detalheSolicitacao
 
 cDados = Dados()
 
-
 def consultarSolicitacoes():
 
     global lsDetalhe

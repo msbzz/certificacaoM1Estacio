@@ -1,5 +1,6 @@
 import openpyxl
 from pathlib import Path
+
  
 class Dados():
     def __init__(self,pathDestino=''):

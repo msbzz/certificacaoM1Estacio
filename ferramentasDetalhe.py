@@ -4,7 +4,6 @@ from tkinter import messagebox
 
 from dadosXLSX import Dados
 
-
 def detalheFerramenta():
     
     cData=Dados()

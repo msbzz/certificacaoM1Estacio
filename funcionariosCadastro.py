@@ -1,7 +1,6 @@
 from tkinter import ttk
 from tkinter import *
 from dadosXLSX import Dados
-
  
 def cadastroFuncionarios():
     

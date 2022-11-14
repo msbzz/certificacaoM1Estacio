@@ -3,7 +3,6 @@ from tkinter import *
 from tkcalendar import *
 
 from dadosXLSX import Dados
-
  
 def cadastroSolicitacoes():
     

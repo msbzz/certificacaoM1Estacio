@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from dadosXLSX import Dados
 
+
 def detalheFuncionario():
 
     cData = Dados()

@@ -8,7 +8,6 @@ from funcionariosDetalhe import detalheFuncionario
 
 cDados = Dados()
 
-
 def consultarFuncionarios():
 
     global lsDetalhe

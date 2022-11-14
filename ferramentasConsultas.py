@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
+
 from dadosXLSX import Dados
 from ferramentasDetalhe import detalheFerramenta
 cDados = Dados()
