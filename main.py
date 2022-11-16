@@ -10,50 +10,55 @@ from funcionariosConsultas import consultarFuncionarios
 
 from solicitacoesCadastro import cadastroSolicitacoes
 from solicitacoesConsultas import consultarSolicitacoes
+
+
+# botão
+btn = '#EB6440'
+backGR = '#497174'
 #janela
 master = tk.Tk()
-
-
-
 master.title("Controle de Ferramentas e Funcionários")
 master.geometry('995x643+491+115')
-
- 
-photo = PhotoImage(file = 'imagens/toolsIco-48.png')# es.ico
+master['background'] = backGR
+#Ícone
+photo = PhotoImage(file='imagens/toolsIco-48.png')
 master.iconphoto(False, photo)
 #fonte
 fontP =('calibri', 12, 'normal')
+
 #Responsividade
-jFerramentas = tk.Frame(master)
-jFuncionarios = tk.Frame(master)
-jSolicitacoes = tk.Frame(master)
+top = Frame(master)
+bottom = Frame(master)
+top.pack(side=TOP, pady=30)
+bottom.pack(side=BOTTOM, pady=60)#, fill=BOTH, expand=True)
+top['background'] = backGR
+bottom['background'] = backGR
 
 #Seção de ferramentas
-scFerramentas = tk.Listbox(jFerramentas)
-#photo = tk.PhotoImage(master, arquivo="/cerificacaoM1Estacio/imagens/ferramentas.jpg")
-bFCadastro = tk.Button(jFerramentas, text="Cadastro de Ferramentas", font=fontP, command=cadastroFerramentas).grid(row=1, column=0)
-bFConsulta = tk.Button(jFerramentas, text="Consulta de Ferramentas", font=fontP,command=consultarFerramentas).grid(row=2, column=0)
-#bFListar = tk.Button(jFerramentas, text="Listar de Ferramentas", font=fontP).grid(row=3, column=0)
-
+#photoFer = PhotoImage(file="C:/Users/fabio.prado/Documents/GitHub/cerificacaoM1Estacio/imagens/fer.gif")
+titFerramentas = Label(top, text="Sessão de Ferramentas", font=fontP, bg=backGR)
+cadferramentas = tk.Button(top, text="Cadastro de Ferramentas", bg=btn, font=fontP, command=cadastroFerramentas)
+consferramentas = tk.Button(top, text="Consulta de Ferramentas", bg=btn, font=fontP, command=consultarFerramentas)
 
 #Funcionarios
-scFuncionarios = tk.Listbox(jFuncionarios)
-bCadastroF = tk.Button(jFuncionarios, text="Cadastrar Funcionário", font=fontP, command=cadastroFuncionarios).grid(row=1, column=1)
-bConsultaF = tk.Button(jFuncionarios, text="Consultar Funcionário", font=fontP,command=consultarFuncionarios).grid(row=2, column=1)
-#bListF = tk.Button(jFuncionarios, text="Listar Funcionário", font=fontP).grid(row=3, column=1)
+titFuncionarios = Label(top, text="Controle de Funcionários", font=fontP, bg=backGR)
+cadfuncionarios = tk.Button(top, text="Cadastrar Funcionário", bg=btn, font=fontP, command=cadastroFuncionarios)
+consfuncionarios = tk.Button(top, text="Consultar Funcionário", bg=btn, font=fontP, command=consultarFuncionarios)
+
 
 #solicitações
-scSolicitacoes = tk.Listbox(jSolicitacoes)
-bSCadastro = tk.Button(jSolicitacoes, text="Cadastrar Solicitações", font=fontP, command=cadastroSolicitacoes).grid(row=5, column=1)
-bSconsult = tk.Button(jSolicitacoes, text="Consultar Solicitações", font=fontP,command=consultarSolicitacoes).grid(row=6, column=1)
-#bSList = tk.Button(jSolicitacoes, text="Listar Solicitações", font=fontP).grid(row=7, column=1)
+titSolicitacoes = Label(bottom, text="Área de Solicitações", font=fontP, bg=backGR)
+bSCadastro = tk.Button(bottom, text="Cadastrar Solicitações", bg=btn, font=fontP, command=cadastroSolicitacoes)
+bSconsult = tk.Button(bottom, text="Consultar Solicitações", bg=btn, font=fontP, command=consultarSolicitacoes)
 
-
-jFerramentas.pack(anchor=NW, padx=50, pady=30)
-jFuncionarios.pack(anchor=NE, padx=50, pady=30)
-jSolicitacoes.pack(anchor=SW, padx=50, pady=30)
-
-
-
+titFerramentas.grid(row=0, column=0, padx=0, pady=0)
+titFuncionarios.grid(row=0, column=2, padx=10, pady=0)
+cadferramentas.grid(row=0, column=1, padx=50, pady=5)
+consferramentas.grid(row=1, column=1, padx=50, pady=5)
+cadfuncionarios.grid(row=0, column=3, padx=0, pady=0)
+consfuncionarios.grid(row=1, column=3, padx=0, pady=0)
+titSolicitacoes.grid(row=4, column=1, padx=0, pady=0)
+bSCadastro.grid(row=5, column=1, padx=5, pady=0)
+bSconsult.grid(row=5, column=2, padx=5, pady=0)
 
 master.mainloop()
