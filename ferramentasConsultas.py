@@ -4,6 +4,8 @@ from tkinter import messagebox
 
 
 from dadosXLSX import Dados
+from cPrintTreeView import PrintTreeview
+
 from ferramentasDetalhe import detalheFerramenta
 cDados = Dados()
 
@@ -26,6 +28,11 @@ def consultarFerramentas():
         'Material'
     ]
     
+
+    #PONTO DE CONFIGURAÇÃO / nome arquivo e titulo
+    arqRelPdf='ListaFerramentas.pdf'
+    tituloRel='Lista de ferramentas'
+
     #PONTO DE CONFIGURAÇÃO / INDICES DOS FILTROS
     listaFiltros = {'codigo': 0 , 'descricao':1, 'fabricante':2, 'material':8}
 
@@ -36,7 +43,7 @@ def consultarFerramentas():
         _sfabricante.set('')
         _smaterial.set('')
 
-
+    
     # FUNÇÃO DE FILTROS
     # função usada dentro da CARGATREEVIEW
     def getFilterTreeView(listaTodos):
@@ -151,6 +158,24 @@ def consultarFerramentas():
         except IOError:
             messagebox.showinfo('Aviso','Necessário selecionar uma linha')
 
+    def listarTreeView(lsCabs):
+       ls=[]
+       for item in tv.get_children():
+          item2=tv.item(item) 
+          valores=tv.item(item,'values')
+          print(item2) # aki reconheco um dicionario 
+          print(item2['values']) #aki reconheço a lista contendo info
+          print(valores) # esse e  o usado na impressao
+          ls.append(valores)
+      
+       #print(ls)
+
+       if len(ls)>0:
+          cPrint=PrintTreeview()
+
+       #PONTO DE CONFIGURAÇÃO / titulo 
+       cPrint.printTv(ls,tituloRel,arqRelPdf,lsCabs)
+
     #remover arq temp da lista usada na tela de detalhe da ferramenta
     def sairDetalhe():
         import os
@@ -254,7 +279,7 @@ def consultarFerramentas():
     Button(frame4, text='detalhe', command=lambda:callDetFerramenta(), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
 
-    Button(frame4, text='listar', command='', bg=bgColorbtn,
+    Button(frame4, text='listar', command=lambda:listarTreeView(Cab), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn          
 
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
