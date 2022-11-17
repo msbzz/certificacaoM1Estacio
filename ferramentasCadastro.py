@@ -1,10 +1,9 @@
-from tkinter import ttk
 from tkinter import *
+from tkinter import ttk
 
 from dadosXLSX import Dados
 
 
- 
 def cadastroFerramentas():
     
     cData=Dados()
@@ -48,6 +47,11 @@ def cadastroFerramentas():
     master =  Toplevel()
     #AKI DEBUG
     #master = Tk()
+    
+    # Cores
+    btn = '#EB6440'
+    btn_ef = '#ed8468'
+    backGR = '#497174'
 
     #LABELS e ENTRYS Y
     nIPADY=8 #labels
@@ -60,31 +64,32 @@ def cadastroFerramentas():
     linElementos=5
 
    #width campos info
-    nWinfo=40
+    nWinfo=41
     nWinfoCombo=39
     nWcaption=21
     
     #master.title("---Ferramentas---")
     master.geometry('900x600+591+215')
     master.wm_resizable(width=False,height=False)
-
     photo = PhotoImage(file = 'imagens/toolsIco-48.png')   
     master.iconphoto(False, photo)
+    master.configure(background= backGR)
     
     nomePlanilhaDeListas='listasFerramentas.xlsx'
 
     #FRAME1 / TITULO
-    frame1=Frame(master,width=900,height=100)#,bg='green' 
+    frame1=Frame(master,width=900,height=100, bg= backGR)#,bg='green' 
     frame1.grid(row=0,column=0,columnspan=3,sticky='nsew')
-    lblTit=Label(frame1, text="CADASTRO DE FERRAMENTAS", font= ("Calibri",16))
-    lblTit.grid(row=0,column=0,pady=40,padx=300) 
+    lblTit=Label(frame1, text="CADASTRO DE FERRAMENTAS", font= ("Calibri",25, "bold"), bg=backGR)
+    lblTit.grid(row=0,column=0,pady=40,padx=240) 
+    
      
     #FRAME2 / LABELS e ENTRIES
-    frame2=Frame(master,width=600,height=500)# 
+    frame2=Frame(master,width=600,height=500, bg=backGR)
     frame2.grid(row=1,column=0,sticky='nsew')
     
     #CODIGO
-    Label(frame2, text="CODIGO", font=("Calibri", 12),width=nWcaption).grid(row=linElementos,
+    Label(frame2, text="CODIGO", font=("Calibri", 12),width=nWcaption,bg=backGR ).grid(row=linElementos,
                                                            column=0,ipady=nIPADY,padx=nIPADX)
 
     _sCodigo=StringVar() 
@@ -94,14 +99,14 @@ def cadastroFerramentas():
 
 
     #DESCRICAO
-    Label (frame2, text="DESCRICAO", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+1,
+    Label (frame2, text="DESCRICAO", font=("Calibri", 12),width=nWcaption, bg=backGR).grid(row=linElementos+1,
                                                                   column=0,ipady=nIPADY,padx=nIPADX)  
     _sDescricao=StringVar()
     Entry(frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sDescricao).grid(row=linElementos+1,column=1,
                                                                          pady=nPADY,padx=nPADX)
 
     #FABRICANTE / combo box 
-    Label ( frame2, text="FABRICANTE", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+2,
+    Label ( frame2, text="FABRICANTE", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+2,
                                                                   column=0,ipady=nIPADY,
                                                                   padx=nIPADX) 
     
@@ -111,7 +116,7 @@ def cadastroFerramentas():
     ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,textvariable=_sFabricante).grid(row=linElementos+2,column=1,pady=nPADY,padx=nPADX)
     
     #VOLTAGEM /combo box 
-    Label ( frame2, text="VOLTAGEM DE USO", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+3,
+    Label ( frame2, text="VOLTAGEM DE USO", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+3,
                                                                        column=0,ipady=nIPADY,
                                                                         padx=nIPADX)
     
@@ -126,7 +131,7 @@ def cadastroFerramentas():
     
     
     #PART NUMBER
-    Label ( frame2, text="PART NUMBER", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+4,
+    Label ( frame2, text="PART NUMBER", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+4,
                                                                     column=0,
                                                                     pady=nIPADY,
                                                                     padx=nIPADX)
@@ -135,18 +140,18 @@ def cadastroFerramentas():
     
     
     #TAMANHO
-    Label ( frame2, text="TAMANHO", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+5,
+    Label ( frame2, text="TAMANHO", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+5,
                                                                column=0,pady=nIPADY,
                                                                 padx=nIPADX)
     
     _sTamanho=StringVar() 
-    Entry (frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sTamanho).grid(row=linElementos+5,
+    Entry (frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sTamanho,).grid(row=linElementos+5,
                                                                         column=1,pady=nIPADY,
                                                                         padx=nIPADX) 
     
 
     #UNIDADE DE MEDIDA
-    Label ( frame2, text="UNIDADE DE MEDIDA", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+6,column=0,
+    Label ( frame2, text="UNIDADE DE MEDIDA", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+6,column=0,
                                                                          pady=nIPADY,padx=nIPADX)
     #combo box UNIDADE DE MEDIDA
     lst=cData.getList(nomePlanilhaDeListas,'unidade de medida')    
@@ -156,7 +161,7 @@ def cadastroFerramentas():
 
     
     #TIPO DE FERRAMENTA 
-    Label ( frame2, text="TIPO DE FERRAMENTA", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+7,
+    Label ( frame2, text="TIPO DE FERRAMENTA", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+7,
                                                                                column=0,pady=nIPADY,
                                                                                padx=nIPADX)
     #combo box 
@@ -168,7 +173,7 @@ def cadastroFerramentas():
                                                         padx=nIPADX)
     
     #MATERIAL
-    Label ( frame2, text="MATERIAL", font=("Calibri", 12),width=nWcaption).grid(row=linElementos+8,
+    Label ( frame2, text="MATERIAL", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+8,
                                                                 column=0,pady=nIPADY,
                                                                 padx=nIPADX)
     #combo box 
@@ -182,9 +187,12 @@ def cadastroFerramentas():
     #frame3=Frame(master,width=300,height=500)#,bg='white' 
     #frame3.grid(row=1,column=1,sticky='nsew')
   
-    Button(master, text="confimar", width=16, height=2, bg="orange",command=salvar).place(x=509, y=544)
-    Button(master, text="retornar", width=16, height=2, bg="orange",command=master.destroy ).place(x=696, y=544)
-     
+    Button(master, text="confimar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=salvar).place(x=509, y=544)
+    Button(master, text="retornar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=master.destroy ).place(x=696, y=544)
+
+    img = PhotoImage(file='imagens/img_cad_ferr.png')
+    lbel_imag=  Label(master, bd= 0,image=img).place(x=565,y=135) 
+    lbel_imag.pack()
     #AKI DEBUG
     #master.mainloop()
  

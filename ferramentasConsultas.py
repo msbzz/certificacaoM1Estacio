@@ -14,6 +14,10 @@ def consultarFerramentas():
    
     global lsDetalhe
     lsDetalhe=[] 
+    #Cores
+    btn = '#EB6440'
+    btn_ef = '#ed8468'
+    backGR = '#497174'
    
     #PONTO DE CONFIGURAÇÃO / CABEÇARIO DO TREEVIEW 
     Cab = [
@@ -183,7 +187,7 @@ def consultarFerramentas():
         master.destroy()
 
     # Cor de fundo filtros
-    bgColor = 'azure3'  # cyan,azure
+    bgColor = backGR  # cyan,azure
 
     # Cor btns
     bgColorbtn = 'green'  # cyan,azure
@@ -217,8 +221,8 @@ def consultarFerramentas():
     #FRAME1 / LABELS
     frame1 = Frame(master, width=900, bg=bgColor)  # ,bg='green'
     frame1.grid(row=1, column=0, sticky='nsew')
-    Label(frame1, text="FILTROS", padx=15, font=("Calibri", 14),
-          bg=bgColor, fg='green').grid(row=0, column=0, pady=10)
+    Label(frame1, text="FILTROS", padx=390, font= ("Calibri",25, "bold"),
+          bg=bgColor).grid(row=0, column=0, pady=10)
 
     #FRAME2 / FILTROS
 
@@ -226,13 +230,14 @@ def consultarFerramentas():
                    bg=bgColor, pady=10)  # ,bg='blue'
     frame2.grid(row=2, column=0, sticky='nsew')
 
-    Label(frame2, text="Código", bg=bgColor, fg='green').grid(row=0, column=0)
-    Label(frame2, text="Descrição", bg=bgColor,
-          fg='green').grid(row=0, column=1)
-    Label(frame2, text="Fabricante", bg=bgColor,
-          fg='green').grid(row=0, column=2)
-    Label(frame2, text="Material", bg=bgColor,
-          fg='green').grid(row=0, column=3)
+    Label(frame2, text="Código", bg=bgColor, font=("calibri", 14)
+                        ).grid(row=0, column=0)
+    Label(frame2, text="Descrição", bg=bgColor, font=("calibri", 14)
+                        ).grid(row=0, column=1)
+    Label(frame2, text="Fabricante", bg=bgColor, font=("calibri", 14)
+                        ).grid(row=0, column=2)
+    Label(frame2, text="Material", bg=bgColor, font=("calibri", 14)
+                        ).grid(row=0, column=3)
 
     
     ##PONTO DE CONFIGURAÇÃO VARs ENTRIES FILTROS 
@@ -255,10 +260,10 @@ def consultarFerramentas():
 
 
     #BTNs FILTROS
-    Button(frame2,font=fontTxt, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2,font=fontTxt, text='filtrar', bg=btn,activebackground= btn_ef,
            command=lambda:cargaTreeView(lsDados,True)).grid(row=1, column=4, padx=10)
 
-    Button(frame2,font=fontTxt, text='refresh', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2,font=fontTxt, text='refresh', bg=btn, activebackground= btn_ef,
            command=lambda:cargaTreeView(lsDados)).grid(row=1, column=5, padx=1)       
 
     #FRAME3 / TREEVIEW
@@ -280,16 +285,16 @@ def consultarFerramentas():
     frame4.grid(row=4, column=0, sticky='nsew')
     
     print('lsDetalhe --------->>',lsDetalhe)
-    Button(frame4,font=fontTxt , text='detalhe', command=lambda:callDetFerramenta(), bg=bgColorbtn,
-           fg=forecolorBtn, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
+    Button(frame4,font=fontTxt , text='detalhe', command=lambda:callDetFerramenta(), bg=btn,
+        activebackground= btn_ef, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
 
-    Button(frame4,font=fontTxt, text='listar', command=lambda:listarTreeView(Cab), bg=bgColorbtn,
-           fg=forecolorBtn, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn          
+    Button(frame4,font=fontTxt, text='listar', command=lambda:listarTreeView(Cab), bg=btn,
+        activebackground= btn_ef, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn          
 
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
 
-    Button(master,font=fontTxt, text="retornar", width=16, height=2, bg=bgColorbtn,
-           fg=forecolorBtn, command=lambda:sairDetalhe()).place(x=696, y=544)
+    Button(master,font=fontTxt, text="retornar", width=16, height=2, bg=btn,
+        activebackground= btn_ef, command=lambda:sairDetalhe()).place(x=696, y=544)
     # AKI DEBUG
     #master.mainloop()
      
