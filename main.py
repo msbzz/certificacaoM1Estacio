@@ -19,13 +19,14 @@ backGR = '#497174'
 master = tk.Tk()
 master.title("Controle de Ferramentas e Funcionários")
 master.geometry('995x643+491+115')
+master.wm_resizable(width=False,height=False)
 master['background'] = backGR
 #Ícone
 photo = PhotoImage(file='imagens/toolsIco-48.png')
 master.iconphoto(False, photo)
 #fonte
 fontP =('calibri', 12, 'normal')
-
+fontTxt=('calibri', 12, 'normal')
 #Responsividade
 top = Frame(master)
 bottom = Frame(master)
@@ -36,18 +37,18 @@ bottom['background'] = backGR
 
 #Seção de ferramentas
 #photoFer = PhotoImage(file="C:/Users/fabio.prado/Documents/GitHub/cerificacaoM1Estacio/imagens/fer.gif")
-titFerramentas = Label(top, text="Sessão de Ferramentas", font=fontP, bg=backGR)
+titFerramentas = Label(top, text="Sessão de Ferramentas", font=fontTxt, bg=backGR)
 cadferramentas = tk.Button(top, text="Cadastro de Ferramentas", bg=btn, font=fontP, command=cadastroFerramentas)
 consferramentas = tk.Button(top, text="Consulta de Ferramentas", bg=btn, font=fontP, command=consultarFerramentas)
 
 #Funcionarios
-titFuncionarios = Label(top, text="Controle de Funcionários", font=fontP, bg=backGR)
+titFuncionarios = Label(top, text="Controle de Funcionários", font=fontTxt, bg=backGR)
 cadfuncionarios = tk.Button(top, text="Cadastrar Funcionário", bg=btn, font=fontP, command=cadastroFuncionarios)
 consfuncionarios = tk.Button(top, text="Consultar Funcionário", bg=btn, font=fontP, command=consultarFuncionarios)
 
 
 #solicitações
-titSolicitacoes = Label(bottom, text="Área de Solicitações", font=fontP, bg=backGR)
+titSolicitacoes = Label(bottom, text="Área de Solicitações", font=fontTxt, bg=backGR)
 bSCadastro = tk.Button(bottom, text="Cadastrar Solicitações", bg=btn, font=fontP, command=cadastroSolicitacoes)
 bSconsult = tk.Button(bottom, text="Consultar Solicitações", bg=btn, font=fontP, command=consultarSolicitacoes)
 
@@ -60,5 +61,10 @@ consfuncionarios.grid(row=1, column=3, padx=0, pady=0)
 titSolicitacoes.grid(row=4, column=1, padx=0, pady=0)
 bSCadastro.grid(row=5, column=1, padx=5, pady=0)
 bSconsult.grid(row=5, column=2, padx=5, pady=0)
+
+
+img = PhotoImage(file='imagens/workers-g-256.png')
+label_image= Label(master,image=img).place(x=280,y=185) 
+#label_image.pack()
 
 master.mainloop()
