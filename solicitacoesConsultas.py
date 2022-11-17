@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 
 from dadosXLSX import Dados
+from cPrintTreeView import PrintTreeview
 
 from solicitacoesDetalhe import detalheSolicitacao
 
@@ -26,6 +27,10 @@ def consultarSolicitacoes():
         'Motivo',
         'Reservada'
     ]
+
+    #PONTO DE CONFIGURAÇÃO PDF / nome arquivo e titulo
+    arqRelPdf='ListaSolicitacoes.pdf'
+    tituloRel='Lista de Solicitações'
 
     # PONTO DE CONFIGURAÇÃO / INDICES DOS FILTROS / 1
     listaFiltros = {'nome': 1, 'equipe': 2, 'codFerramenta': 3, 'reservada': 9}
@@ -157,6 +162,24 @@ def consultarSolicitacoes():
         except IOError:
             messagebox.showinfo('Aviso', 'Necessário selecionar uma linha')
 
+    #IMPRIME TREEVIEW
+    def listarTreeView(lsCabs):
+        ls=[]
+        for item in tv.get_children():
+           item2=tv.item(item) 
+           valores=tv.item(item,'values')
+           print(item2) # aki reconheco um dicionario 
+           print(item2['values']) #aki reconheço a lista contendo info
+           print(valores) # esse e  o usado na impressao
+           ls.append(valores)
+      
+        #print(ls)
+
+        if len(ls)>0:
+          cPrint=PrintTreeview()
+ 
+        cPrint.printTv(ls,tituloRel,arqRelPdf,lsCabs)
+
     # remover arq temp da lista usada na tela de detalhe da ferramenta
     def sairDetalhe():
         import os
@@ -256,7 +279,7 @@ def consultarSolicitacoes():
     Button(frame4, text='detalhe', command=lambda: callDetConsulta(), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
 
-    Button(frame4, text='listar', command='', bg=bgColorbtn,
+    Button(frame4, text='listar', command=lambda:listarTreeView(Cab), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn
 
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')

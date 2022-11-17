@@ -59,9 +59,9 @@ class PrintTreeview():
         c.save() 
         webbrowser.open(arquivo_ext_pdf)
 
-ls=[('1', 'mmm', '888'), ('2', 'bbbb', '9999'), ('3', 'uuuu', '4444')]
-lsCabs=['id','nome','telefone']
+ls=[('1', 'mmm', '888','endereco1','cep1','mae1'), ('2', 'bbbb', '9999','endereco2','cep2','mae2'), ('3', 'uuuu', '4444','endereco3','cep3','mae3')]
+lsCabs=['id','nome','telefone','endereco','cep','mae']
 
 #AKI DEBUG
-#c=PrintTreeview()
-#c.printTv(ls,'Lista de funcionários','funcionarios.pdf',lsCabs)
+c=PrintTreeview()
+c.printTv(ls,'Lista de funcionários','funcionarios.pdf',lsCabs)

@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
-from cPrintTreeView import PrintTreeview
+from cPrintTreeView_v2 import PrintTreeview
 
 def inserir():
     if vid.get()=="" or vnome.get()=="" or  vfone.get()=="":

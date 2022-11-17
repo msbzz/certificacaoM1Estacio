@@ -29,7 +29,7 @@ def consultarFerramentas():
     ]
     
 
-    #PONTO DE CONFIGURAÇÃO / nome arquivo e titulo
+    #PONTO DE CONFIGURAÇÃO PDF / nome arquivo e titulo
     arqRelPdf='ListaFerramentas.pdf'
     tituloRel='Lista de ferramentas'
 
@@ -158,6 +158,7 @@ def consultarFerramentas():
         except IOError:
             messagebox.showinfo('Aviso','Necessário selecionar uma linha')
 
+    #IMPRIME TREEVIEW
     def listarTreeView(lsCabs):
        ls=[]
        for item in tv.get_children():
@@ -172,8 +173,7 @@ def consultarFerramentas():
 
        if len(ls)>0:
           cPrint=PrintTreeview()
-
-       #PONTO DE CONFIGURAÇÃO / titulo 
+ 
        cPrint.printTv(ls,tituloRel,arqRelPdf,lsCabs)
 
     #remover arq temp da lista usada na tela de detalhe da ferramenta
@@ -188,6 +188,10 @@ def consultarFerramentas():
     # Cor btns
     bgColorbtn = 'green'  # cyan,azure
     forecolorBtn = 'white'
+    
+    #fonte
+    fontP =('calibri', 12, 'normal')
+    fontTxt=('calibri', 12, 'normal')
 
     # AKI PRODUCAO
     master = Toplevel()
@@ -251,10 +255,10 @@ def consultarFerramentas():
 
 
     #BTNs FILTROS
-    Button(frame2, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2,font=fontTxt, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
            command=lambda:cargaTreeView(lsDados,True)).grid(row=1, column=4, padx=10)
 
-    Button(frame2, text='refresh', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2,font=fontTxt, text='refresh', bg=bgColorbtn, fg=forecolorBtn,
            command=lambda:cargaTreeView(lsDados)).grid(row=1, column=5, padx=1)       
 
     #FRAME3 / TREEVIEW
@@ -276,15 +280,15 @@ def consultarFerramentas():
     frame4.grid(row=4, column=0, sticky='nsew')
     
     print('lsDetalhe --------->>',lsDetalhe)
-    Button(frame4, text='detalhe', command=lambda:callDetFerramenta(), bg=bgColorbtn,
+    Button(frame4,font=fontTxt , text='detalhe', command=lambda:callDetFerramenta(), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
 
-    Button(frame4, text='listar', command=lambda:listarTreeView(Cab), bg=bgColorbtn,
+    Button(frame4,font=fontTxt, text='listar', command=lambda:listarTreeView(Cab), bg=bgColorbtn,
            fg=forecolorBtn, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn          
 
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
 
-    Button(master, text="retornar", width=16, height=2, bg=bgColorbtn,
+    Button(master,font=fontTxt, text="retornar", width=16, height=2, bg=bgColorbtn,
            fg=forecolorBtn, command=lambda:sairDetalhe()).place(x=696, y=544)
     # AKI DEBUG
     #master.mainloop()
