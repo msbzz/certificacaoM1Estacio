@@ -1,11 +1,12 @@
 from tkinter import ttk
 from tkinter import *
 from tkcalendar import *
+from PIL import Image, ImageTk 
 
 from dadosXLSX import Dados
  
 def cadastroSolicitacoes():
-    
+
     cData=Dados()
 
     def limparCampos():
@@ -46,6 +47,11 @@ def cadastroSolicitacoes():
     #AKI DEBUG
     #master = Tk()
 
+    #Cores
+    btn = '#EB6440'
+    btn_ef = '#ed8468'
+    backGR = '#497174'
+
     #LABELS e ENTRYS Y
     nIPADY=8 #labels
     nPADY=8  # entrys
@@ -65,7 +71,8 @@ def cadastroSolicitacoes():
     #master.title("Cadastro de Solicitações")
     master.geometry('900x600+591+215')
     master.wm_resizable(width=False,height=False)
-
+    master.configure(background= backGR)
+    
     photo = PhotoImage(file = 'imagens/solicitacoes-48.png')   
     master.iconphoto(False, photo) 
     
@@ -74,13 +81,13 @@ def cadastroSolicitacoes():
     nomePlanilhaDeListasFuncionarios='listasFuncionarios.xlsx'
 
     #FRAME1 / TITULO
-    frame1=Frame(master,width=900,height=100)#,bg='green' 
+    frame1=Frame(master,width=900,height=100,bg=backGR)#,bg='green' 
     frame1.grid(row=0,column=0,columnspan=3,sticky='nsew')
-    lblTit=Label(frame1, text="CADASTRO DE SOLICITAÇÕES", font= ("Calibri",16))
+    lblTit=Label(frame1, text="CADASTRO DE SOLICITAÇÕES", font= ("Calibri",16),bg=backGR)
     lblTit.grid(row=0,column=0,pady=40,padx=300)  
      
     #FRAME2 / LABELS e ENTRIES------------------------
-    frame2=Frame(master,width=600,height=500)# 
+    frame2=Frame(master,width=600,height=500,bg=backGR)# 
     frame2.grid(row=1,column=0,sticky='nsew')
     
     
@@ -89,22 +96,21 @@ def cadastroSolicitacoes():
 
     
     # CPF label
-    Label(frame2, text="CPF", font=("Calibri",
-                 12),width=nWcaption).grid(row=linElementos,
+    Label(frame2,font=('Calibri',12) ,text="CPF",width=nWcaption,bg=backGR).grid(row=linElementos,
                            column=0,ipady=nIPADY,padx=nIPADX) 
-    
+     
     # CPF info
     _sCpf=StringVar() 
-    Entry(frame2,bd=2,font=('Calibri',12),textvariable=_sCpf,
+    Entry(frame2,bd=2,textvariable=_sCpf,font=('Calibri',12),
                                           width=nWinfo).grid(row=linElementos,
                                                          column=1,pady=nPADY,
                                                          padx=nPADX)
-    
+     
     #reserva
     _sReservado=StringVar()
     chkReserva = IntVar()
     
-    Checkbutton(frame2, text='RESERVA',font=('Calibri',12),
+    Checkbutton(frame2, text='RESERVA',font=('Calibri',12),bg=backGR,
               variable= chkReserva, onvalue=1, offvalue=0, 
               command=lambda:setReserva(chkReserva)).grid(row=linElementos,column=2,
                                        pady=nPADY,padx=nPADX)
@@ -112,7 +118,7 @@ def cadastroSolicitacoes():
 
     # NOME label
     Label (frame2, text="NOME", 
-          font=("Calibri", 12),width=nWcaption).grid(row=linElementos+1,
+          font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+1,
                                      column=0,ipady=nIPADY,padx=nIPADX) 
     # NOME info
     _sNome=StringVar()
@@ -121,7 +127,7 @@ def cadastroSolicitacoes():
                                            pady=nPADY,padx=nPADX)    
     # EQUIPES caption
     Label ( frame2, text="EQUIPE", font=("Calibri", 12),
-                   width=nWcaption).grid(row=linElementos+2,
+                   width=nWcaption,bg=backGR).grid(row=linElementos+2,
                                         column=0,ipady=nIPADY,
                                         padx=nIPADX) 
 
@@ -135,7 +141,7 @@ def cadastroSolicitacoes():
 
     #codigo da ferramenta caption
     Label ( frame2, text="CODIGO DA FERRAMENTA", 
-                    font=("Calibri", 12),width=nWcaption).grid(row=linElementos+3,
+                    font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+3,
                                                column=0,ipady=nIPADY,
                                                padx=nIPADX)
 
@@ -150,7 +156,7 @@ def cadastroSolicitacoes():
 
     #data saida caption
     Label ( frame2, text="DATA DA SAIDA", 
-                   font=("Calibri", 12),width=nWcaption).grid(row=linElementos+4,
+                   font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+4,
                                               column=0,
                                               ipady=nIPADY,
                                               padx=nIPADX)
@@ -164,15 +170,18 @@ def cadastroSolicitacoes():
                                                    pady=nPADY,
                                                    padx=nPADX) 
 
-    #data calendario
+    #BUTTON data calendario
     photo= PhotoImage(file='imagens/calendar-24.png')
     #image=photo 
-    Button(frame2, text='data',
-                 command=lambda:callCalendario(1)).grid(row=linElementos+4,column=2,padx=2) 
+    btnDt1= Button(frame2, text='data',image=photo,
+                 command=lambda:callCalendario(1))
+                 #.grid(row=linElementos+4,column=2,padx=2) 
+    btnDt1.place(x=680,y=165)
+    
 
     #hora saida caption
     Label ( frame2, text="HORA DA SAIDA", 
-                  font=("Calibri", 12),width=nWcaption).grid(row=linElementos+5,
+                  font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+5,
                                              column=0,ipady=nIPADY,
                                              padx=nIPADX)
 
@@ -192,7 +201,7 @@ def cadastroSolicitacoes():
     #data devolucao caption
     Label ( frame2, text="DATA DA DEVOLUÇÃO", 
                    font=("Calibri", 13),
-                   width=nWcaption).grid(row=linElementos+6,column=0,
+                   width=nWcaption,bg=backGR).grid(row=linElementos+6,column=0,
                                          ipady=nIPADY,padx=nIPADX)
 
     #data devolucao info
@@ -202,13 +211,15 @@ def cadastroSolicitacoes():
                  relief=SUNKEN,anchor="w",background='white',
                 width=nWinfo).grid(row=linElementos+6,
                               column=1,pady=nPADY,padx=nPADX) 
-    #image==photo,
-    Button(frame2, text='data', 
-                  command=lambda:callCalendario(2)).grid(row=linElementos+6,column=2,padx=2)
+    #BUTTON # data  
+    btnDt2=Button(frame2, text='data', image=photo,
+                  command=lambda:callCalendario(2))
+                 #.grid(row=linElementos+6,column=2,padx=2)
+    btnDt2.place(x=680,y=251)                
     #hora devolucao caption
     Label ( frame2, text="HORA DA DEVOLUÇÃO", 
                     font=("Calibri", 12),
-                    width=nWcaption).grid(row=linElementos+7,
+                    width=nWcaption,bg=backGR).grid(row=linElementos+7,
                                           column=0,ipady=nIPADY,
                                           padx=nIPADX)
 
@@ -225,7 +236,7 @@ def cadastroSolicitacoes():
     #motivo caption
     Label ( frame2, text="MOTIVO", 
                     font=("Calibri", 12),
-                    width=nWcaption).grid(row=linElementos+8,
+                    width=nWcaption,bg=backGR).grid(row=linElementos+8,
                                           column=0,ipady=nIPADY,
                                           padx=nIPADX)
 
@@ -239,14 +250,11 @@ def cadastroSolicitacoes():
                                                     pady=nPADY,
                                                     padx=nPADX)    
 
-    #frame4=Frame(master,width=300,height=500)#,bg='yellow' 
-    #frame4.grid(row=1,column=2)    
-
      
     limparCampos()
 
-    Button(master, text="confimar", width=16, height=2, bg="orange",command=salvar).place(x=509, y=544)
-    Button(master, text="retornar", width=16, height=2, bg="orange",command=master.destroy ).place(x=696, y=544)
+    Button(master, text="confimar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=salvar).place(x=509, y=544)
+    Button(master, text="retornar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=master.destroy ).place(x=696, y=544)
     
     def setReserva(chkReserva):
         if chkReserva ==1:
@@ -268,7 +276,7 @@ def cadastroSolicitacoes():
         current_time = datetime.datetime.now()
 
         top = Toplevel(master)
-
+        top.configure(background= backGR) 
         photo = PhotoImage(file = 'imagens/calendar-48.png')   
         top.iconphoto(False, photo)
         top.geometry('450x500+1150+315')
@@ -280,13 +288,15 @@ def cadastroSolicitacoes():
 
 
 
-        ttk.Button(top, text="ok", command=print_sel).pack()
-        ttk.Button(top, text="exit", command=quit1).pack()
+        ttk.Button(top, text="ok", command=lambda:print_sel()).pack()
+        ttk.Button(top, text="exit", command=lambda:quit1()).pack()
 
 
-        my_label = Label(master, text='')
+        my_label = Label(top, text='')
         my_label.pack(pady=20)
- 
+    
+    btnDt1.draw()
+    btnDt2.draw()
     #AKI DEBUG
     #master.mainloop()
  
