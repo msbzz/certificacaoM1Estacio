@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-
+from PIL import Image, ImageTk
 from dadosXLSX import Dados
 
 
@@ -52,6 +52,9 @@ def cadastroFerramentas():
     btn = '#EB6440'
     btn_ef = '#ed8468'
     backGR = '#497174'
+    #fonte
+    fontP =('calibri', 12, 'normal')
+    fontTxt=('calibri', 12, 'normal')
 
     #LABELS e ENTRYS Y
     nIPADY=8 #labels
@@ -187,11 +190,23 @@ def cadastroFerramentas():
     #frame3=Frame(master,width=300,height=500)#,bg='white' 
     #frame3.grid(row=1,column=1,sticky='nsew')
   
-    Button(master, text="confimar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=salvar).place(x=509, y=544)
-    Button(master, text="retornar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=master.destroy ).place(x=696, y=544)
+    Button(master, text="confimar", width=14, height=2, bg=btn,activebackground= btn_ef ,font=fontP,command=salvar).place(x=509, y=544)
+    Button(master, text="retornar", width=14, height=2, bg=btn,activebackground= btn_ef ,font=fontP,command=master.destroy ).place(x=696, y=544)
+    
+    #,activebackground= btn_ef
 
-    img = PhotoImage(file='imagens/img_cad_ferr.png')
-    lbel_imag=  Label(master, bd= 0,image=img).place(x=565,y=135) 
+    #img = PhotoImage(file='imagens/img_cad_ferr.png')
+    # Load the image
+    image=Image.open('imagens/img_cad_ferr.png')
+
+    # Resize the image in the given (width, height)
+    img=image.resize((260, 250))
+
+    # Conver the image in TkImage
+    my_img=ImageTk.PhotoImage(img)
+
+
+    lbel_imag=  Label(master, bd= 0,image=my_img).place(x=650,y=135) 
     lbel_imag.pack()
     #AKI DEBUG
     #master.mainloop()

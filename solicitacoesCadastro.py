@@ -1,8 +1,10 @@
 from tkinter import ttk
 from tkinter import *
 from tkcalendar import *
+from tkinter import messagebox
 from PIL import Image, ImageTk 
 
+import cpfutil
 from dadosXLSX import Dados
  
 def cadastroSolicitacoes():
@@ -22,24 +24,34 @@ def cadastroSolicitacoes():
         _Motivo.set('')
         _sReservado.set('NÃO')
     def salvar():
-        
-        dadosCadastro=[
-        _sCpf.get(),
-        _sNome.get(),
-        _sEquipe.get(),
-        _sCodFerramenta.get(),
-        _sDataSaida.get(),
-        _sHoraSaida.get(),
-        _sDataDevolucao.get(),
-        _sHoraDevolucao.get(),
-        _Motivo.get(),
-        _sReservado.get()
-        ]     
 
-         
+        def camposValidos():
 
-        cData.createInsertXLSX('solicitacoes.xlsx','solicitacoes',dadosCadastro)
-        limparCampos()
+            cpf=_sCpf.get()
+            if cpfutil.is_valid(cpf):
+                return True
+            else:
+                msg='O cpf digitado não é valido, verifique.'
+                messagebox.showerror('Erro',msg)
+                return False    
+
+
+        if camposValidos():         
+           dadosCadastro=[
+            _sCpf.get(),
+            _sNome.get(),
+            _sEquipe.get(),
+            _sCodFerramenta.get(),
+            _sDataSaida.get(),
+            _sHoraSaida.get(),
+            _sDataDevolucao.get(),
+            _sHoraDevolucao.get(),
+            _Motivo.get(),
+            _sReservado.get()
+            ]     
+
+           cData.createInsertXLSX('solicitacoes.xlsx','solicitacoes',dadosCadastro)
+           limparCampos()
 
 
     #AKI PRODUCAO 
@@ -52,6 +64,10 @@ def cadastroSolicitacoes():
     btn_ef = '#ed8468'
     backGR = '#497174'
 
+    #fonte
+    fontP =('calibri', 12, 'normal')
+    fontTxt=('calibri', 12, 'normal')
+    
     #LABELS e ENTRYS Y
     nIPADY=8 #labels
     nPADY=8  # entrys
@@ -253,8 +269,8 @@ def cadastroSolicitacoes():
      
     limparCampos()
 
-    Button(master, text="confimar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=salvar).place(x=509, y=544)
-    Button(master, text="retornar", width=16, height=2, bg=btn ,activebackground= btn_ef,command=master.destroy ).place(x=696, y=544)
+    Button(master, text="confimar", width=14, height=2, bg=btn ,activebackground= btn_ef,font=fontP,command=salvar).place(x=509, y=544)
+    Button(master, text="retornar", width=14, height=2, bg=btn ,activebackground= btn_ef,font=fontP,command=master.destroy ).place(x=696, y=544)
     
     def setReserva(chkReserva):
         if chkReserva ==1:
@@ -292,8 +308,8 @@ def cadastroSolicitacoes():
         ttk.Button(top, text="exit", command=lambda:quit1()).pack()
 
 
-        my_label = Label(top, text='')
-        my_label.pack(pady=20)
+        #my_label = Label(top, text='')
+        #my_label.pack(pady=20)
     
     btnDt1.draw()
     btnDt2.draw()
