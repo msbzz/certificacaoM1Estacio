@@ -127,7 +127,7 @@ def cadastroFuncionarios():
     # get lista turnos
     lst=cData.getList(nomePlanilhaDeListas,'turno')
     _sturno=StringVar()
-    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfo,textvariable=_sturno).grid(row=linElementos+3,
+    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),state="readonly",width=nWinfo,textvariable=_sturno).grid(row=linElementos+3,
                                                                      column=1,pady=nPADY,
                                                                     padx=nPADX)
 
@@ -138,7 +138,7 @@ def cadastroFuncionarios():
     # get lista equipes
     lst=cData.getList(nomePlanilhaDeListas,'equipes')
     _snome_equipe=StringVar()
-    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfo,textvariable=_snome_equipe).grid(row=linElementos+4,
+    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfo,state="readonly",textvariable=_snome_equipe).grid(row=linElementos+4,
                                                                      column=1,pady=nPADY,
                                                                     padx=nPADX)
    

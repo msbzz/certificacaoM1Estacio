@@ -116,7 +116,7 @@ def cadastroFerramentas():
     # get lista 
     lst=cData.getList(nomePlanilhaDeListas,'fabricante')
     _sFabricante=StringVar()
-    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,textvariable=_sFabricante).grid(row=linElementos+2,column=1,pady=nPADY,padx=nPADX)
+    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",textvariable=_sFabricante).grid(row=linElementos+2,column=1,pady=nPADY,padx=nPADX)
     
     #VOLTAGEM /combo box 
     Label ( frame2, text="VOLTAGEM DE USO", font=("Calibri", 12),width=nWcaption,bg=backGR).grid(row=linElementos+3,
@@ -127,7 +127,7 @@ def cadastroFerramentas():
     lst=cData.getList(nomePlanilhaDeListas,'voltagem')
     print('lst-->>',lst)
     _sVoltagem=StringVar()
-    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,
+    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),state="readonly",width=nWinfoCombo,
                           textvariable=_sVoltagem).grid(row=linElementos+3,
                                                          column=1,pady=nPADY,
                                                          padx=nPADX)
@@ -159,7 +159,7 @@ def cadastroFerramentas():
     #combo box UNIDADE DE MEDIDA
     lst=cData.getList(nomePlanilhaDeListas,'unidade de medida')    
     _sUnidade=StringVar()
-    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),textvariable=_sUnidade,width=nWinfoCombo).grid(row=linElementos+6,column=1,
+    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),textvariable=_sUnidade,state="readonly",width=nWinfoCombo).grid(row=linElementos+6,column=1,
                                                                                                    pady=nIPADY,padx=nIPADX)    
 
     
@@ -170,7 +170,7 @@ def cadastroFerramentas():
     #combo box 
     lst=cData.getList(nomePlanilhaDeListas,'tipo de ferramentas')
     _sTpFerramenta=StringVar()
-    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,
+    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
                         textvariable=_sTpFerramenta).grid(row=linElementos+7,
                                                         column=1,pady=nIPADY,
                                                         padx=nIPADX)
@@ -182,7 +182,7 @@ def cadastroFerramentas():
     #combo box 
     lst=cData.getList(nomePlanilhaDeListas,'material') 
     _sMaterial=StringVar()  
-    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,textvariable=_sMaterial).grid(row=linElementos+8,
+    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",textvariable=_sMaterial).grid(row=linElementos+8,
                                                                                                  column=1,pady=nIPADY,
                                                                                                    padx=nIPADX)    
       

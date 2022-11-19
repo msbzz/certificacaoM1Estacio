@@ -150,7 +150,7 @@ def cadastroSolicitacoes():
     # EQUIPES info
     lst=cData.getList(nomePlanilhaDeListasFuncionarios,'equipes')
     _sEquipe=StringVar()
-    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,
+    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
                           textvariable=_sEquipe).grid(row=linElementos+2,
                           column=1,pady=nPADY,padx=nPADX)
 
@@ -164,7 +164,7 @@ def cadastroSolicitacoes():
     #codigo da ferramenta info
     lst=cData.getList(nomePlanilhaDeFerramentas,'ferramentas') 
     _sCodFerramenta=StringVar()
-    ttk.Combobox(frame2,value=lst,font=("Calibri", 12),
+    ttk.Combobox(frame2,value=lst,font=("Calibri", 12),state="readonly",
                         width=nWinfoCombo,textvariable=_sCodFerramenta).grid(row=linElementos+3,
                                                                     column=1,
                                                                     pady=nPADY,
@@ -204,7 +204,7 @@ def cadastroSolicitacoes():
     #hora saida info
     _sHoraSaida=StringVar()
     lst=cData.getList(nomePlanilhaDeListas,'horarios')
-    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),
+    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),state="readonly",
                         width=nWinfoCombo,
                         textvariable=_sHoraSaida).grid(row=linElementos+5,
                                                        column=1,
@@ -231,7 +231,8 @@ def cadastroSolicitacoes():
     btnDt2=Button(frame2, text='data', image=photo,
                   command=lambda:callCalendario(2))
                  #.grid(row=linElementos+6,column=2,padx=2)
-    btnDt2.place(x=680,y=251)                
+    btnDt2.place(x=680,y=251) 
+
     #hora devolucao caption
     Label ( frame2, text="HORA DA DEVOLUÇÃO", 
                     font=("Calibri", 12),
@@ -243,7 +244,7 @@ def cadastroSolicitacoes():
     lst=cData.getList(nomePlanilhaDeListas,'horarios')
     _sHoraDevolucao=StringVar()
     ttk.Combobox (frame2,value=lst,
-                         font=("Calibri", 12),width=nWinfoCombo,
+                         font=("Calibri", 12),width=nWinfoCombo,state="readonly",
                          textvariable=_sHoraDevolucao).grid(row=linElementos+7,
                                                            column=1,pady=nPADY,
                                                            padx=nPADX)
@@ -259,7 +260,7 @@ def cadastroSolicitacoes():
     #motivo info
     lst=cData.getList(nomePlanilhaDeListas,'motivo') 
     _Motivo=StringVar()  
-    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),
+    ttk.Combobox (frame2,value=lst,font=("Calibri", 12),state="readonly",
                          width=nWinfoCombo,
                          textvariable=_Motivo).grid(row=linElementos+8,
                                                     column=1,
