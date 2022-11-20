@@ -23,31 +23,110 @@ def cadastroSolicitacoes():
         _sHoraDevolucao.set('')
         _Motivo.set('')
         _sReservado.set('NÃO')
+    
     def salvar():
+        cpf=_sCpf.get()
+        nome=_sNome.get()
+        equipe=_sEquipe.get() 
+        codFerramentas=_sCodFerramenta.get()
+        dataSaida=_sDataSaida.get()
+        horaSaida=_sHoraSaida.get()
+        dataDevolucao=_sDataDevolucao.get()
+        horaDevolucao=_sHoraDevolucao.get()
+        motivo=_Motivo.get()
+
+        #setReserva(chkReserva)
+        reservado=_sReservado.get()
+        def campoStringInvalido(valor):
+            if len(valor)==0:
+                return True
+            else:
+                return False 
+
+        def msgBox(msg):
+              messagebox.showerror('Erro',msg,parent=master)
+
 
         def camposValidos():
 
-            cpf=_sCpf.get()
-            if cpfutil.is_valid(cpf):
-                return True
-            else:
+            #se não cair em nenhuma critica sai como true
+            bReturn=True
+              
+            #Critica CPF
+            if cpfutil.is_valid(cpf)!=True:
                 msg='O cpf digitado não é valido, verifique.'
-                messagebox.showerror('Erro',msg)
+                msgBox(msg)
                 return False    
+         
+            #Critica nome vazio
+            if campoStringInvalido(nome) :
+                msg='Nome não definido, verifique.'
+                msgBox(msg)
+                return False
 
+            #Critica equipe vazio
+            if campoStringInvalido(equipe):
+                msg='Equipe não definida, verifique.'
+                msgBox(msg)
+                return  False 
+
+            #Critica codFerramentas vazio
+            if campoStringInvalido(codFerramentas):
+                msg='Código da ferramenta não definido, verifique.'
+                msgBox(msg)
+                return  False  
+
+            #Critica dataSaida vazio
+            if campoStringInvalido(dataSaida):
+                msg='Data saida não definida, verifique.'
+                msgBox(msg)
+                return  False  
+
+            #Critica horaSaida vazio
+            if campoStringInvalido(horaSaida):
+                msg='Hora saida não definida, verifique.'
+                msgBox(msg)
+                return  False 
+
+            #Critica dataDevolucao vazio
+            if campoStringInvalido(dataDevolucao):
+                msg='Data de devolução não definida, verifique.'
+                msgBox(msg)
+                return  False 
+
+            #Critica horaDevolucao vazio
+            if campoStringInvalido(horaDevolucao):
+                msg='Hora de devolução não definida, verifique.'
+                msgBox(msg)
+                return  False 
+
+            #Critica horaDevolucao vazio
+            if campoStringInvalido(horaDevolucao):
+                msg='Hora de devolução não definida, verifique.'
+                msgBox(msg)
+                return  False 
+
+
+            #Critica motivo vazio
+            if campoStringInvalido(motivo):
+                msg='Motivo não definido, verifique.'
+                msgBox(msg)
+                return  False 
+
+            return bReturn
 
         if camposValidos():         
            dadosCadastro=[
-            _sCpf.get(),
-            _sNome.get(),
-            _sEquipe.get(),
-            _sCodFerramenta.get(),
-            _sDataSaida.get(),
-            _sHoraSaida.get(),
-            _sDataDevolucao.get(),
-            _sHoraDevolucao.get(),
-            _Motivo.get(),
-            _sReservado.get()
+             cpf,
+            nome,
+            equipe,
+            codFerramentas,
+            dataSaida,
+            horaSaida,
+            dataDevolucao,
+            horaDevolucao,
+            motivo,
+            reservado
             ]     
 
            cData.createInsertXLSX('solicitacoes.xlsx','solicitacoes',dadosCadastro)
@@ -92,6 +171,8 @@ def cadastroSolicitacoes():
     photo = PhotoImage(file = 'imagens/solicitacoes-48.png')   
     master.iconphoto(False, photo) 
     
+    #Planilhas usadas
+    nomePlanilhaDeFuncionarios='funcionarios.xlsx'
     nomePlanilhaDeListas='listasSolicitacoes.xlsx'
     nomePlanilhaDeFerramentas='ferramentas.xlsx' #codigos
     nomePlanilhaDeListasFuncionarios='listasFuncionarios.xlsx'
@@ -126,11 +207,10 @@ def cadastroSolicitacoes():
     _sReservado=StringVar()
     chkReserva = IntVar()
     
-    Checkbutton(frame2, text='RESERVA',font=('Calibri',12),bg=backGR,
-              variable= chkReserva, onvalue=1, offvalue=0, 
-              command=lambda:setReserva(chkReserva)).grid(row=linElementos,column=2,
+    Checkbutton(frame2, text='RESERVA',font=('Calibri',12),bg=backGR,command=lambda:setReserva(),
+              variable= chkReserva, onvalue=1, offvalue=0).grid(row=linElementos,column=2,
                                        pady=nPADY,padx=nPADX)
-
+    
 
     # NOME label
     Label (frame2, text="NOME", 
@@ -138,9 +218,16 @@ def cadastroSolicitacoes():
                                      column=0,ipady=nIPADY,padx=nIPADX) 
     # NOME info
     _sNome=StringVar()
+    lst=cData.getList(nomePlanilhaDeFuncionarios,'tecnicos')
+    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
+                          textvariable=_sNome).grid(row=linElementos+1,
+                          column=1,pady=nPADY,padx=nPADX)
+    """
     Entry(frame2,bd=2,font=('Calibri',12),
          textvariable=_sNome,width=nWinfo).grid(row=linElementos+1,column=1,
-                                           pady=nPADY,padx=nPADX)    
+                                           pady=nPADY,padx=nPADX) 
+    """
+
     # EQUIPES caption
     Label ( frame2, text="EQUIPE", font=("Calibri", 12),
                    width=nWcaption,bg=backGR).grid(row=linElementos+2,
@@ -273,8 +360,9 @@ def cadastroSolicitacoes():
     Button(master, text="confimar", width=14, height=2, bg=btn ,activebackground= btn_ef,font=fontP,command=salvar).place(x=509, y=544)
     Button(master, text="retornar", width=14, height=2, bg=btn ,activebackground= btn_ef,font=fontP,command=master.destroy ).place(x=696, y=544)
     
-    def setReserva(chkReserva):
-        if chkReserva ==1:
+    def setReserva():
+        print('chkReserva -->>',chkReserva.get())
+        if chkReserva.get() ==1:
             _sReservado.set('SIM')
         else:
             _sReservado.set('NÃO')    

@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from PIL import Image, ImageTk
+from tkinter import messagebox
 from dadosXLSX import Dados
 
 
@@ -22,26 +23,94 @@ def cadastroFerramentas():
 
          
     def salvar():
+        codigo=_sCodigo.get()
+        descricao=_sDescricao.get()
+        fabricante=_sFabricante.get()
+        voltagem=_sVoltagem.get()
+        partNumber=_sPartNumber.get()
+        tamanho=_sTamanho.get()
+        unidade=_sUnidade.get()
+        tpFerramenta=_sTpFerramenta.get()
+        material=_sMaterial.get()
 
-        dadosCadastro=[
-                _sCodigo.get(),
-                _sDescricao.get(),
-                _sFabricante.get(),
-                _sVoltagem.get(),
-                _sPartNumber.get(),
-                _sTamanho.get(),
-                _sUnidade.get(),
-                _sTpFerramenta.get(),
-                _sMaterial.get()
+        def campoStringInvalido(valor):
+            if len(valor)==0:
+                return True
+            else:
+                return False 
+        
 
-                ]
-         
+        def msgBox(msg):
+          messagebox.showerror('Erro',msg,parent=master)
+
+        def camposValidos():
+           #se não cair em nenhuma critica sai como true
+           bReturn=True
+
+           if campoStringInvalido(codigo):
+                msg='codigo não definido, verifique.'
+                msgBox(msg)
+                return  False 
+
+           if campoStringInvalido(descricao):
+                msg='descricao não definido, verifique.'
+                msgBox(msg)
+                return  False 
+
+           if campoStringInvalido(fabricante):
+                msg='fabricante não definida, verifique.'
+                msgBox(msg)
+                return  False 
+
+           if campoStringInvalido(voltagem):
+                msg='voltagem não definida, verifique.'
+                msgBox(msg)
+                return  False
+
+           if campoStringInvalido(partNumber):
+                msg='partNumber não definida, verifique.'
+                msgBox(msg)
+                return  False
+
+           if campoStringInvalido(tamanho):
+                msg='tamanho não definido, verifique.'
+                msgBox(msg)
+                return  False
+
+           if campoStringInvalido(unidade):
+                msg='unidade não definida, verifique.'
+                msgBox(msg)
+                return  False
+
+           if campoStringInvalido(tpFerramenta):
+                msg='tipo de Ferramenta não definido, verifique.'
+                msgBox(msg)
+                return  False
+
+           if campoStringInvalido(material):
+                msg='material não definido, verifique.'
+                msgBox(msg)
+                return  False
 
 
-         
-         
-        cData.createInsertXLSX('ferramentas.xlsx','ferramentas',dadosCadastro)
-        limparCampos()
+           return bReturn
+
+        if camposValidos():  
+            dadosCadastro=[
+                    codigo,
+                    descricao,
+                    fabricante,
+                    voltagem,
+                    partNumber,
+                    tamanho,
+                    unidade,
+                    tpFerramenta,
+                    material
+
+                    ]
+                    
+            cData.createInsertXLSX('ferramentas.xlsx','ferramentas',dadosCadastro)
+            limparCampos()
 
     #AKI PRODUCAO 
     master =  Toplevel()

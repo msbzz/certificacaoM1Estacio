@@ -19,24 +19,59 @@ def cadastroFuncionarios():
        
 
     def salvar():
-
-        def camposValidos():
-
-            cpf=_scpf.get()
-            if cpfutil.is_valid(cpf):
+        nome=_snome.get()
+        cpf=_scpf.get()
+        telefone=_stelefone.get()
+        turno=  _sturno.get()
+        equipe=_snome_equipe.get()
+        
+        def campoStringInvalido(valor):
+            if len(valor)==0:
                 return True
             else:
+                return False 
+        
+        def msgBox(msg):
+             messagebox.showerror('Erro',msg,parent=master)
+
+        def camposValidos():
+           #se não cair em nenhuma critica sai como true  
+           bReturn=True
+
+           if campoStringInvalido(nome):
+                msg='Nome não definido, verifique.'
+                msgBox(msg)
+                return False                
+
+           if cpfutil.is_valid(cpf)!=True:
                 msg='O cpf digitado não é valido, verifique.'
-                messagebox.showerror('Erro',msg)
+                msgBox(msg)
                 return False    
 
+           if campoStringInvalido(telefone):
+                msg='telefone não definido, verifique.'
+                msgBox(msg)
+                return False
+
+           if campoStringInvalido(turno):
+                msg='turno não definido, verifique.'
+                msgBox(msg)
+                return False
+
+           if campoStringInvalido(equipe):
+                msg='equipe não definida, verifique.'
+                msgBox(msg)
+                return False
+ 
+           return bReturn
+           
         if camposValidos():  
             dadosCadastro=[
-                        _snome.get(),
-                        _scpf.get(),
-                        _stelefone.get(),
-                        _sturno.get(),
-                        _snome_equipe.get(),
+                        nome,
+                        cpf,
+                        telefone,
+                        turno,
+                        equipe,
                         ]
                 
                 
