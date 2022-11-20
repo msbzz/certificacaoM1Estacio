@@ -6,9 +6,14 @@ from PIL import Image, ImageTk
 
 import cpfutil
 from dadosXLSX import Dados
- 
-def cadastroSolicitacoes():
 
+import datetime 
+
+def cadastroSolicitacoes():
+    
+    current_time = datetime.datetime.now()
+    diaDisponivel=current_time.day
+    
     cData=Dados()
 
     def limparCampos():
@@ -22,6 +27,8 @@ def cadastroSolicitacoes():
         _sDataDevolucao.set('')
         _sHoraDevolucao.set('')
         _Motivo.set('')
+
+        chkReserva.set(0)
         _sReservado.set('NÃO')
     
     def salvar():
@@ -34,9 +41,9 @@ def cadastroSolicitacoes():
         dataDevolucao=_sDataDevolucao.get()
         horaDevolucao=_sHoraDevolucao.get()
         motivo=_Motivo.get()
-
-        #setReserva(chkReserva)
+ 
         reservado=_sReservado.get()
+
         def campoStringInvalido(valor):
             if len(valor)==0:
                 return True
@@ -207,7 +214,8 @@ def cadastroSolicitacoes():
     _sReservado=StringVar()
     chkReserva = IntVar()
     
-    Checkbutton(frame2, text='RESERVA',font=('Calibri',12),bg=backGR,command=lambda:setReserva(),
+    Checkbutton(frame2, text='RESERVA',font=('Calibri',12),bg=backGR,
+                activebackground= backGR,command=lambda:setReserva(),
               variable= chkReserva, onvalue=1, offvalue=0).grid(row=linElementos,column=2,
                                        pady=nPADY,padx=nPADX)
     
@@ -362,12 +370,26 @@ def cadastroSolicitacoes():
     
     def setReserva():
         print('chkReserva -->>',chkReserva.get())
+        
+        _sDataSaida.set('')
+        _sHoraSaida.set('')
+        _sDataDevolucao.set('')
+        _sHoraDevolucao.set('')
+
         if chkReserva.get() ==1:
             _sReservado.set('SIM')
+            
         else:
-            _sReservado.set('NÃO')    
+            _sReservado.set('NÃO') 
+  
 
     def callCalendario(valor):
+
+        if chkReserva.get() ==1:
+            diaDisponivel=current_time.day+1
+        else:
+            diaDisponivel=current_time.day 
+
         def print_sel():
             if valor==1:
                _sDataSaida.set(cal.get_date())
@@ -377,8 +399,7 @@ def cadastroSolicitacoes():
         def quit1():
             top.destroy()
 
-        import datetime
-        current_time = datetime.datetime.now()
+
 
         top = Toplevel(master)
         top.configure(background= backGR) 
@@ -388,7 +409,9 @@ def cadastroSolicitacoes():
 
         cal = Calendar(top,
                        font="Arial 14", selectmode='day',
-                       cursor="hand1", year=current_time.year, month=current_time.month, day=current_time.day)
+                       cursor="hand1", year=current_time.year, month=current_time.month, 
+                       day=diaDisponivel)
+
         cal.pack(fill="both", expand=True)
 
 
