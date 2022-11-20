@@ -18,7 +18,13 @@ def detalheSolicitacao():
     master_ch = Toplevel()
     # AKI DEBUG
     #master_ch = Tk()
-
+    
+    # Cores
+    btn = '#EB6440'
+    btn_ef = '#ed8468'
+    backGR = '#497174'
+    lbbr= "#d8e2e3"
+    
     # LABELS e ENTRYS Y
     nIPADY = 8  # labels
     nPADY = 8  # entrys
@@ -36,16 +42,18 @@ def detalheSolicitacao():
     #master_ch.title("Detalhe Solicitação")
     master_ch.geometry('900x600+610+255')
     master_ch.wm_resizable(width=False, height=False)
+    master_ch.configure(background= backGR)
 
     #FRAME1 / TITULO
-    frame1 = Frame(master_ch, width=900, height=100)  # ,bg='green'
+    frame1 = Frame(master_ch, width=900, height=100, bg= backGR) 
     frame1.grid(row=0, column=0, columnspan=3, sticky='nsew')
 
-    lblTit = Label(frame1, text="DETALHE SOLICITAÇÃO", font=("Calibri", 16))
+    lblTit = Label(frame1, text="DETALHE SOLICITAÇÃO",  font= ("Calibri",25, "bold"), 
+    bg=backGR)
     lblTit.grid(row=0, column=0, pady=40, padx=300)
 
     # FRAME2 / LABELS------------------------
-    frame2 = Frame(master_ch, width=300, height=500)
+    frame2 = Frame(master_ch, width=300, height=500, bg=backGR)
     frame2.grid(row=1, column=0, sticky='nsew')
 
     # essa dicionario serve apenas para saber o indice
@@ -65,12 +73,12 @@ def detalheSolicitacao():
 
     # CPF caption
     Label(frame2, text="CPF", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos,
                                               column=0, ipady=nIPADY, padx=nIPADX)
 
     # CPF info
     Label(frame2, text=lsDetalhe[0], relief=SUNKEN, width=nWinfo,
-          font=("Calibri", 12)).grid(row=linElementos,
+          font=("Calibri", 12), bg=lbbr).grid(row=linElementos,
                                      column=1, pady=nPADY,
                                      padx=nPADX)
 
@@ -98,103 +106,103 @@ def detalheSolicitacao():
     """
     # NOME caption
     Label(frame2, text="NOME", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+1,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+1,
                                               column=0, ipady=nIPADY, padx=nIPADX)
 
     # NOME info
     Label(frame2, text=lsDetalhe[1], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+1, column=1,
+        "Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+1, column=1,
                                            pady=nPADY, padx=nPADX)
 
     # EQUIPE label
     Label(frame2, text="EQUIPE", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+2,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+2,
                                               column=0, ipady=nIPADY,
                                               padx=nIPADX)
 
     # EQUIPE info
     Label(frame2, text=lsDetalhe[2], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+2,
+        "Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+2,
                                            column=1, pady=nPADY, padx=nPADX)
 
     # CODIGO DA FERRAMENTA caption
     Label(frame2, text="CODIGO DA FERRAMENTA", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+3,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+3,
                                               column=0, ipady=nIPADY,
                                               padx=nIPADX)
 
     # CODIGO DA FERRAMENTA info
     Label(frame2, text=lsDetalhe[3], relief=SUNKEN,
-          font=("Calibri", 12), width=nWinfo).grid(row=linElementos+3,
+          font=("Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+3,
                                                    column=1,
                                                    pady=nPADY,
                                                    padx=nPADX)
 
     # DATA SAIDA caption
     Label(frame2, text="DATA DA SAIDA", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+4,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+4,
                                               column=0,
                                               ipady=nIPADY,
                                               padx=nIPADX)
 
     # DATA SAIDA info
     Label(frame2, text=lsDetalhe[4], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+4,
+        "Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+4,
                                            column=1,
                                            pady=nPADY,
                                            padx=nPADX)
     # HORA SAIDA caption
     Label(frame2, text="HORA DA SAIDA",
-          font=("Calibri", 12), width=nWcaption).grid(row=linElementos+5,
+          font=("Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+5,
                                                       column=0, ipady=nIPADY,
                                                       padx=nIPADX)
 
     # HORA SAIDA info
     Label(frame2, text=lsDetalhe[5], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+5,
+        "Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+5,
                                            column=1,
                                            pady=nPADY,
                                            padx=nPADX)
 
-    # DATA DEVOLUÇÃO captin
+    # DATA DEVOLUÇÃO caption
     Label(frame2, text="DATA DA DEVOLUÇÃO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+6, column=0,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+6, column=0,
                                               ipady=nIPADY, padx=nIPADX)
 
     # DATA DEVOLUÇÃO info
     Label(frame2, text=lsDetalhe[6], relief=SUNKEN,
-          font=("Calibri", 12), width=nWinfo).grid(row=linElementos+6,
+          font=("Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+6,
                                                    column=1, pady=nPADY, padx=nPADX)
 
     # HORA DEVOLUÇÃO caption
     Label(frame2, text="HORA DA DEVOLUÇÃO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+7, column=0,
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+7, column=0,
                                               ipady=nIPADY, padx=nIPADX)
 
     # HORA DEVOLUÇÃO info
     Label(frame2, text=lsDetalhe[7], relief=SUNKEN,
-          font=("Calibri", 12), width=nWinfo).grid(row=linElementos+7,
+          font=("Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+7,
                                                    column=1, pady=nPADY,
                                                    padx=nPADX)
 
     # MOTIVO caption
     Label(frame2, text="MOTIVO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+8, column=0, ipady=nIPADY, padx=nIPADX)
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+8, column=0, ipady=nIPADY, padx=nIPADX)
 
     # MOTIVO info
     Label(frame2, text=lsDetalhe[8], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+8,
+        "Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+8,
                                            column=1,
                                            pady=nPADY,
                                            padx=nPADX)
 
     # RESERVADO caption
     Label(frame2, text="RESERVADO", font=(
-        "Calibri", 12), width=nWcaption).grid(row=linElementos+9, column=0, ipady=nIPADY, padx=nIPADX)
+        "Calibri", 12), width=nWcaption, bg= backGR).grid(row=linElementos+9, column=0, ipady=nIPADY, padx=nIPADX)
 
     # RESERVADO  info
     Label(frame2, text=lsDetalhe[9], relief=SUNKEN, font=(
-        "Calibri", 12), width=nWinfo).grid(row=linElementos+9,
+        "Calibri", 12), width=nWinfo, bg=lbbr).grid(row=linElementos+9,
                                            column=1,
                                            pady=nPADY,
                                            padx=nPADX)
@@ -204,7 +212,7 @@ def detalheSolicitacao():
     #frame3.grid(row=1, column=1, sticky='nsew')
 
     Button(master_ch, text="retornar", width=16, height=2,
-           bg="orange", command=master_ch.destroy).place(x=696, y=544)
+           bg=btn,activebackground= btn_ef, command=master_ch.destroy).place(x=696, y=544)
 
     # AKI DEBUG
     # master_ch.mainloop()

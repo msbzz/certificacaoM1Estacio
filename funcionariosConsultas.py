@@ -5,6 +5,7 @@ from tkinter import messagebox
 from dadosXLSX import Dados
 from cPrintTreeView import PrintTreeview
 
+
 from funcionariosDetalhe import detalheFuncionario
 
 cDados = Dados()
@@ -13,6 +14,8 @@ def consultarFuncionarios():
 
     global lsDetalhe
     lsDetalhe = []
+
+
 
     # PONTO DE CONFIGURAÇÃO / CABEÇARIO DO TREEVIEW
     Cab = [
@@ -178,15 +181,25 @@ def consultarFuncionarios():
     # remover arq temp da lista usada na tela de detalhe da ferramenta
     def sairDetalhe():
         import os
-        os.remove('newfileLista.txt')
+        try:
+          os.remove('newfileLista.txt')
+        except:
+          pass  
         master.destroy()
 
-    # Cor de fundo filtros
-    bgColor = 'azure3'  # cyan,azure
 
-    # Cor btns
-    bgColorbtn = 'green'  # cyan,azure
-    forecolorBtn = 'white'
+    #Cores
+    btn = '#EB6440'
+    btn_ef = '#ed8468'
+    backGR = '#497174'
+
+    # Cor de fundo filtros
+    bgColor = backGR   
+
+    
+    #fonte
+    fontP =('calibri', 12, 'normal')
+    fontTxt=('calibri', 12, 'normal')
 
     # AKI PRODUCAO
     master = Toplevel()
@@ -212,8 +225,8 @@ def consultarFuncionarios():
     #FRAME1 / LABELS
     frame1 = Frame(master, width=900, bg=bgColor)  # ,bg='green'
     frame1.grid(row=1, column=0, sticky='nsew')
-    Label(frame1, text="FILTROS", padx=15, font=("Calibri", 14),
-          bg=bgColor, fg='green').grid(row=0, column=0, pady=10)
+    Label(frame1, text="FILTROS", padx=15, font= ("Calibri",25, "bold"),
+          bg=bgColor ).grid(row=0, column=0, pady=10)
 
     #FRAME2 / FILTROS
 
@@ -222,12 +235,12 @@ def consultarFuncionarios():
     frame2.grid(row=2, column=0, sticky='nsew')
 
     # AKI CONFIGURAÇÂO LABELS FILTROS
-    Label(frame2, text="Nome", bg=bgColor, fg='green').grid(row=0, column=0)
-    Label(frame2, text="Cpf", bg=bgColor, fg='green').grid(row=0, column=1)
-    Label(frame2, text="Turno", bg=bgColor,
-          fg='green').grid(row=0, column=2)
-    Label(frame2, text="Equipe", bg=bgColor,
-          fg='green').grid(row=0, column=3)
+    Label(frame2, text="Nome", bg=bgColor,font=("calibri", 14)).grid(row=0, column=0)
+    Label(frame2, text="Cpf", bg=bgColor,font=("calibri", 14)).grid(row=0, column=1)
+    Label(frame2, text="Turno", bg=bgColor,font=("calibri", 14)
+          ).grid(row=0, column=2)
+    Label(frame2, text="Equipe", bg=bgColor,font=("calibri", 14)
+           ).grid(row=0, column=3)
 
     # PONTO DE CONFIGURAÇÃO VARs ENTRIES FILTROS // use 2
     _sNome = StringVar()
@@ -246,10 +259,10 @@ def consultarFuncionarios():
     print('cont row ==>', len(lsDados))
 
     # BTNs FILTROS
-    Button(frame2, text='filtrar', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2, text='filtrar', bg=btn,activebackground= btn_ef,
            command=lambda: cargaTreeView(lsDados, True)).grid(row=1, column=4, padx=10)
 
-    Button(frame2, text='refresh', bg=bgColorbtn, fg=forecolorBtn,
+    Button(frame2, text='refresh', bg=btn,activebackground= btn_ef,
            command=lambda: cargaTreeView(lsDados)).grid(row=1, column=5, padx=1)
 
     #FRAME3 / TREEVIEW
@@ -271,19 +284,19 @@ def consultarFuncionarios():
     frame4.grid(row=4, column=0, sticky='nsew')
 
     print('lsDetalhe --------->>', lsDetalhe)
-    Button(frame4, text='detalhe', command=lambda: callDetConsulta(), bg=bgColorbtn,
-           fg=forecolorBtn, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
+    Button(frame4, text='detalhe', command=lambda: callDetConsulta(), 
+           bg=btn,activebackground= btn_ef, width=10).grid(row=3, column=4, padx=10)  # fg=forecolorBtn
 
-    Button(frame4, text='listar', command=lambda:listarTreeView(Cab), bg=bgColorbtn,
-           fg=forecolorBtn, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn
+    Button(frame4, text='listar', command=lambda:listarTreeView(Cab),
+           bg=btn,activebackground= btn_ef, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn
 
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
 
     #frame5 = Frame(master, width=900, height=100, bg=bgColor)  # ,bg='white'
     #frame5.grid(row=5, column=0, sticky='nsew')
 
-    Button(master, text="retornar", width=16, height=2, bg=bgColorbtn,
-           fg=forecolorBtn, 
+    Button(master, text="retornar", width=16, height=2,
+           bg=btn,activebackground= btn_ef,
            command=lambda: sairDetalhe()).place(x=800, y=544)
     # AKI DEBUG
     #master.mainloop()

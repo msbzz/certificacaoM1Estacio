@@ -14,11 +14,7 @@ def consultarFerramentas():
    
     global lsDetalhe
     lsDetalhe=[] 
-    #Cores
-    btn = '#EB6440'
-    btn_ef = '#ed8468'
-    backGR = '#497174'
-   
+
     #PONTO DE CONFIGURAÇÃO / CABEÇARIO DO TREEVIEW 
     Cab = [
         'Codigo',
@@ -183,9 +179,17 @@ def consultarFerramentas():
     #remover arq temp da lista usada na tela de detalhe da ferramenta
     def sairDetalhe():
         import os
-        os.remove('newfileLista.txt')
+        try:
+          os.remove('newfileLista.txt')
+        except:
+          pass  
         master.destroy()
 
+    #Cores
+    btn = '#EB6440'
+    btn_ef = '#ed8468'
+    backGR = '#497174'
+   
     # Cor de fundo filtros
     bgColor = backGR  # cyan,azure
 
