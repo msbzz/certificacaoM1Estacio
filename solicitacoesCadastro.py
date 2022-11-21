@@ -205,11 +205,21 @@ def cadastroSolicitacoes():
      
     # CPF info
     _sCpf=StringVar() 
+    """
     Entry(frame2,bd=2,textvariable=_sCpf,font=('Calibri',12),
                                           width=nWinfo).grid(row=linElementos,
                                                          column=1,pady=nPADY,
                                                          padx=nPADX)
-     
+    """                                                     
+    lst=cData.getList(nomePlanilhaDeFuncionarios,'tecnicos',1)
+    cbCPF=ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
+                          textvariable=_sCpf)
+
+    cbCPF.grid(row=linElementos,column=1,pady=nPADY,padx=nPADX) 
+    
+ 
+
+                      
     #reserva
     _sReservado=StringVar()
     chkReserva = IntVar()
@@ -227,9 +237,11 @@ def cadastroSolicitacoes():
     # NOME info
     _sNome=StringVar()
     lst=cData.getList(nomePlanilhaDeFuncionarios,'tecnicos')
-    ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
-                          textvariable=_sNome).grid(row=linElementos+1,
-                          column=1,pady=nPADY,padx=nPADX)
+    cbNome=ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
+                          textvariable=_sNome)
+    
+    cbNome.grid(row=linElementos+1,column=1,pady=nPADY,padx=nPADX)
+    
     """
     Entry(frame2,bd=2,font=('Calibri',12),
          textvariable=_sNome,width=nWinfo).grid(row=linElementos+1,column=1,
@@ -259,11 +271,10 @@ def cadastroSolicitacoes():
     #codigo da ferramenta info
     lst=cData.getList(nomePlanilhaDeFerramentas,'ferramentas') 
     _sCodFerramenta=StringVar()
-    ttk.Combobox(frame2,value=lst,font=("Calibri", 12),state="readonly",
-                        width=nWinfoCombo,textvariable=_sCodFerramenta).grid(row=linElementos+3,
-                                                                    column=1,
-                                                                    pady=nPADY,
-                                                                    padx=nPADX)
+    cdCodFerr=ttk.Combobox(frame2,value=lst,font=("Calibri", 12),state="readonly",
+                        width=nWinfoCombo,textvariable=_sCodFerramenta)
+
+    cdCodFerr.grid(row=linElementos+3,column=1,pady=nPADY,padx=nPADX)                                                                
 
     #data saida caption
     Label ( frame2, text="DATA DA SAIDA", 
@@ -419,10 +430,48 @@ def cadastroSolicitacoes():
         ttk.Button(top, text="ok", command=lambda:print_sel()).pack()
         ttk.Button(top, text="exit", command=lambda:quit1()).pack()
 
-
-        #my_label = Label(top, text='')
-        #my_label.pack(pady=20)
     
+    #funções relacionadas aos eventos
+    def FerramentaAlocada(event):
+        nItensCabSolicitacoes=9
+        codFerr=_sCodFerramenta.get()
+        ls2=cData.OpenFindDateXLSX('solicitacoes.xlsx','solicitacoes',codFerr,nItensCabSolicitacoes)
+
+        #verificar data da entrega maior q data atual
+        if len(ls2)>0:
+            print('dados ferr==>>>',ls2)
+            #['827.177.323.91', 'Marco', 'NOITE', 'DJS-IW-90', '13/11/2022', '09:00:00', '14/11/2022', '10:00:00', 'TRABALHO', 'SIM']
+            
+            if ls2[9]!='SIM':
+              msg='Ferramenta já esta alocada com ' + ls2[1] + ', com previsão de entrega para ' + ls2[6] + ' as ' + ls2[7]
+            else:   
+              msg='Ferramenta já reservada para ' + ls2[1] + ', com previsão de saida para ' + ls2[4] + ' as ' + ls2[5]+' a ser confirmada'  
+
+            messagebox.showinfo('Erro',msg,parent=master)
+
+            _sCodFerramenta.set('')
+
+    def atualizaDadosFuncCpf(event):
+        nItensCabFunc=4
+        cpf=_sCpf.get()
+        ls2=cData.OpenFindDateXLSX('funcionarios.xlsx','tecnicos',cpf,nItensCabFunc)
+        _sNome.set(ls2[0])
+        _sEquipe.set(ls2[4])
+        print('dados func==>>>',ls2)
+         
+    def atualizaDadosFuncNome(event):
+        nItensCabFunc=4
+        nome=_sNome.get() 
+        ls2=cData.OpenFindDateXLSX('funcionarios.xlsx','tecnicos',nome,nItensCabFunc) 
+        _sCpf.set(ls2[1])
+        _sEquipe.set(ls2[4])
+        print('dados func==>>>',ls2)
+        
+ 
+    #EVENTOS COMBOS
+    cbCPF.bind("<<ComboboxSelected>>",atualizaDadosFuncCpf)
+    cbNome.bind("<<ComboboxSelected>>",atualizaDadosFuncNome)
+    cdCodFerr.bind("<<ComboboxSelected>>",FerramentaAlocada)
     btnDt1.draw()
     btnDt2.draw()
     #AKI DEBUG

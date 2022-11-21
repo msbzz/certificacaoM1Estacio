@@ -1,5 +1,6 @@
 import openpyxl
 from pathlib import Path
+
  
 class Dados():
     def __init__(self,pathDestino=''):
@@ -69,28 +70,30 @@ class Dados():
         nCols=len(lsCab)
 
         lsReturn = []
-
-        #REDUZIR O NUMERO DE LINHAS DO GRID / para testar retorno usa max_row=1
-        for rows in infoCells.iter_rows(min_row=1):
+        try:
+           #REDUZIR O NUMERO DE LINHAS DO GRID / para testar retorno usa max_row=1
+           #min_row=1
+           for rows in infoCells.iter_rows():
             
-            ls=''
+               ls=''
              
-            for i in range(0,nCols):
-                  if (len(ls)>0):
-                     ls+= ','+rows[i].value
-                  else:
-                     ls= rows[i].value 
+               for i in range(0,nCols):
+                   if (len(ls)>0):
+                      ls+= ','+rows[i].value
+                   else:
+                      ls= rows[i].value 
 
-            if (rows[0].value!=None):
-               lsReturn.append(ls.upper())
-            else: 
-               break
+               if (rows[0].value!=None):
+                  lsReturn.append(ls.upper())
+               else: 
+                  break
 
-            #print('dados ========>>>>>',ls.split(','))
-
+               #print('dados ========>>>>>',ls.split(','))
+        except:
+            pass 
         return lsReturn     
 
-    def getList(self, nome_e_Extensao, nomePlanilha):
+    def getList(self, nome_e_Extensao, nomePlanilha,col=0):
 
         # retorna uma lista lida da coluna 'A' da planilha
         book = self.openpyXL(nome_e_Extensao,nomePlanilha)
@@ -101,27 +104,53 @@ class Dados():
         for rows in infoCells.iter_rows(min_row=1):
             # print(rows[0].value,rows[1].value,rows[2].value)
             # print(f'{rows[0].value},{rows[1].value},{rows[2].value}')
-            if (rows[0].value!=None):
-              lsReturn.append(rows[0].value)
+            if (rows[col].value!=None):
+              lsReturn.append(rows[col].value)
             else: 
               break
              
         return lsReturn
 
-    def OpenFindDateXLSX(self, nome_e_Extensao, nomePlanilha, chave, valor):
-        
-        # a openpyxl é nativa da biblioteca por isso precisa do tratamento do path
-        pathDestinoArq = self.getPathPlanilhas(self.pathDestino,nome_e_Extensao)
-
-        book = openpyxl.load_workbook(pathDestinoArq)
+    def OpenFindDateXLSX(self, nome_e_Extensao, nomePlanilha, valor, nCols):
+          
+        book = self.openpyXL(nome_e_Extensao,nomePlanilha)
         infoCells = book[nomePlanilha]
 
         bReturn = False
+        ls=[]
 
-        for rows in infoCells.iter_rows(min_row=2, max_row=5):
-            for cell in rows:
-                if cell.value == chave:
-                    cell.value = valor
-                    bReturn = True
+        for rows in infoCells.iter_rows(min_row=1):
+            for i in range(0,nCols+1):
+               print('rows[i].value-->>',rows[i].value) 
+               if rows[i].value.upper()==valor.upper():
+                    for i in range(0,nCols+1):
+                        ls.append(rows[i].value)
+        return ls               
+                    
+    
+    def saveFileTemp(self,ls):
+        print('saveFileTemp-->>>',ls) 
+        arquivoTemp=open('newfileLista.txt','w')
+        for i in range(0,len(ls)):
+            if type(ls[i])==int:
+                ls[i]=str(ls[i])
+            arquivoTemp.write(ls[i]+'\n') 
+        arquivoTemp.close()
+        
+    # How to read a file
+    def readFileTemp(self):
+        
+        ls=[]
+        sTemp=''
+        try:
+           arquivoTemp=open('newfileLista.txt','r')
+           for line in arquivoTemp.readlines():
+               sTemp=line[:-1]
+               ls.append(sTemp)
+        
+           arquivoTemp.close()
+        except:
+            pass
+        
+        return(ls)
 
-            return bReturn

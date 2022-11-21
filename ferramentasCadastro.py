@@ -39,6 +39,19 @@ def cadastroFerramentas():
             else:
                 return False 
         
+        def existeDuplicidade(codigo):
+            bReturn= False  
+            # se a planilha não existir ainda precisa de try
+            try:
+               #codigo esta na primeira coluna por isso não preciso das demais
+               nItens=0 
+               ls2=cData.OpenFindDateXLSX('ferramentas.xlsx','ferramentas',codigo,nItens)
+               if len(ls2)>0:
+                  bReturn = True #vai bloquear
+            except:
+               pass   
+
+            return bReturn
 
         def msgBox(msg):
           messagebox.showerror('Erro',msg,parent=master)
@@ -50,7 +63,13 @@ def cadastroFerramentas():
            if campoStringInvalido(codigo):
                 msg='codigo não definido, verifique.'
                 msgBox(msg)
-                return  False 
+                return  False
+           elif existeDuplicidade(codigo):
+                msg='codigo já cadastrado, verifique.'
+                msgBox(msg)
+                return  False
+           else:
+               pass       
 
            if campoStringInvalido(descricao):
                 msg='descricao não definido, verifique.'
