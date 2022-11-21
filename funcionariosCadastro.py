@@ -25,13 +25,13 @@ def cadastroFuncionarios():
         turno=  _sturno.get()
         equipe=_snome_equipe.get()
 
-        def existeDuplicidade(nome):
+        def existeDuplicidade(valor,nItens=0):
             bReturn= False  
             # se a planilha não existir ainda precisa de try
             try:
                #codigo esta na primeira coluna por isso não preciso das demais
-               nItens=0 
-               ls2=cData.OpenFindDateXLSX('funcionarios.xlsx','tecnicos',nome,nItens)
+               #nItens representa o numero colunas a serem acessadas, 1 vai procurar na 0 e 1  
+               ls2=cData.OpenFindDateXLSX('funcionarios.xlsx','tecnicos',valor,nItens)
                if len(ls2)>0:
                   bReturn = True #vai bloquear
             except:
@@ -65,7 +65,12 @@ def cadastroFuncionarios():
                 msg='O cpf digitado não é valido, verifique.'
                 msgBox(msg)
                 return False    
-
+           elif existeDuplicidade(cpf,1):
+                msg='CPF já cadastrado, verifique.'
+                msgBox(msg)
+                return  False
+           else:
+               pass
            if campoStringInvalido(telefone):
                 msg='telefone não definido, verifique.'
                 msgBox(msg)
