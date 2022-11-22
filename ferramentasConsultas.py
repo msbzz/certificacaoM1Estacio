@@ -210,7 +210,7 @@ def consultarFerramentas():
     #master.title("---Ferramentas---")
     master.geometry('900x600+591+215')
     
-    photo = PhotoImage(file = 'imagens/toolsIco-48.png')   
+    photo = PhotoImage(file='imagens/report-48.png')
     master.iconphoto(False, photo)
 
     master.wm_resizable(width=False, height=False)

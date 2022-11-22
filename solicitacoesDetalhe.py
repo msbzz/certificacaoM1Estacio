@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 from dadosXLSX import Dados
 
 
@@ -43,6 +44,8 @@ def detalheSolicitacao():
     master_ch.geometry('900x600+610+255')
     master_ch.wm_resizable(width=False, height=False)
     master_ch.configure(background= backGR)
+    photo = PhotoImage(file='imagens/ico_ferr_func.png')
+    master_ch.iconphoto(False, photo)
 
     #FRAME1 / TITULO
     frame1 = Frame(master_ch, width=900, height=100, bg= backGR) 
@@ -213,6 +216,19 @@ def detalheSolicitacao():
 
     Button(master_ch, text="retornar", width=16, height=2,
            bg=btn,activebackground= btn_ef, command=master_ch.destroy).place(x=696, y=544)
+
+     # Load the image
+    image=Image.open('imagens/img_detalhes_solic.png')
+
+    # Resize the image in the given (width, height)
+    img=image.resize((260, 250))
+
+    # Conver the image in TkImage
+    my_img=ImageTk.PhotoImage(img)
+
+
+    lbel_imag=  Label(master_ch, bd= 0,image=my_img).place(x=600,y=135) 
+    lbel_imag.pack()
 
     # AKI DEBUG
     # master_ch.mainloop()
