@@ -43,7 +43,7 @@ def detalheFerramenta():
     master_ch.geometry('900x600+610+255')
     master_ch.wm_resizable(width=False, height=False)
     master_ch.configure(background= backGR)
-    photo = PhotoImage(file = 'imagens/toolsIco-48.png') 
+    photo = PhotoImage(file = 'imagens/detFerrIco.png') 
     master_ch.iconphoto(False, photo)
     
 
@@ -193,16 +193,18 @@ def detalheFerramenta():
 
 
         # Load the image
-    image=Image.open('imagens/img_detalhes_ferr.png')
+    image=Image.open('imagens/img_cad_ferr_det.png')
+                     #img_cad_ferr
+                     #img_det_ferr
 
     # Resize the image in the given (width, height)
-    img=image.resize((260, 250))
+    img=image.resize((160, 250))
 
     # Conver the image in TkImage
     my_img=ImageTk.PhotoImage(img)
 
 
-    lbel_imag=  Label(master_ch, bd= 0,image=my_img).place(x=650,y=135) 
+    lbel_imag=  Label(master_ch, bd= 0,image=my_img).place(x=750,y=135) 
     lbel_imag.pack()
 
     # AKI DEBUG

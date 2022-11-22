@@ -136,7 +136,9 @@ def cadastroFuncionarios():
     master.geometry('900x600+591+215')
     master.wm_resizable(width=False,height=False)
     master.configure(background= backGR)
-    photo = PhotoImage(file = 'imagens/ico_funcionarios.png') 
+    photo = PhotoImage(file = 'imagens/toolsIco-48.png') 
+    #toolsIco-48
+    #funcIco-48
     master.iconphoto(False, photo)
 
     nomePlanilhaDeListas='listasFuncionarios.xlsx'
@@ -220,16 +222,19 @@ def cadastroFuncionarios():
     Button(master, text="Retornar", width=14, height=2, bg=btn ,activebackground= btn_ef,font=fontP,command=master.destroy ).place(x=696, y=544)
 
         # Load the image
-    image=Image.open('imagens/img_cad_func.png')
+    image=Image.open('imagens/img_cad_ferr.png')
+    #img_cad_ferr.png
+    #img_cad_func.png 
+
 
     # Resize the image in the given (width, height)
-    img=image.resize((260, 250))
+    img=image.resize((160, 250))
 
     # Conver the image in TkImage
     my_img=ImageTk.PhotoImage(img)
 
 
-    lbel_imag=  Label(master, bd= 0,image=my_img).place(x=650,y=135) 
+    lbel_imag=  Label(master, bd= 0,image=my_img).place(x=700,y=135) 
     lbel_imag.pack()
      
     #AKI DEBUG
