@@ -72,12 +72,12 @@ def cadastroFerramentas():
                pass       
 
            if campoStringInvalido(descricao):
-                msg='descricao não definido, verifique.'
+                msg='descricao não definida, verifique.'
                 msgBox(msg)
                 return  False 
 
            if campoStringInvalido(fabricante):
-                msg='fabricante não definida, verifique.'
+                msg='fabricante não definido, verifique.'
                 msgBox(msg)
                 return  False 
 
@@ -87,7 +87,7 @@ def cadastroFerramentas():
                 return  False
 
            if campoStringInvalido(partNumber):
-                msg='partNumber não definida, verifique.'
+                msg='partNumber não definido, verifique.'
                 msgBox(msg)
                 return  False
 
@@ -102,7 +102,7 @@ def cadastroFerramentas():
                 return  False
 
            if campoStringInvalido(tpFerramenta):
-                msg='tipo de Ferramenta não definido, verifique.'
+                msg='tipo de Ferramenta não definida, verifique.'
                 msgBox(msg)
                 return  False
 

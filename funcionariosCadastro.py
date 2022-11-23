@@ -224,7 +224,8 @@ def cadastroFuncionarios():
         # Load the image
     image=Image.open('imagens/img_cad_ferr.png')
     #img_cad_ferr.png
-    #img_cad_func.png 
+    #img_cad_func.png
+    # ico_ferr_func 
 
 
     # Resize the image in the given (width, height)

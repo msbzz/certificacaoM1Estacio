@@ -46,9 +46,6 @@ def consultarFuncionarios():
     def getFilterTreeView(listaTodos):
         def contains(s, other):
             return s.__contains__(other)
-
-
-        
             
 
         def getFilter(lsTodos, conteudo, indice):
@@ -81,7 +78,7 @@ def consultarFuncionarios():
             lsReturnAll = getFilter(listaTodos, cpf, listaFiltros['cpf'])
         else:
             lsReturnAll = getFilter(
-                lsReturnAll, equipe, listaFiltros['cpf'])
+                lsReturnAll, cpf, listaFiltros['cpf'])
 
         if len(lsReturnAll) == 0:
             lsReturnAll = getFilter(
