@@ -19,7 +19,7 @@ Uma segunda dificuladade foi a disponibilidade individual do tempo para o desenv
 
 Sendo assim era necessário primeiro concluir a parte funcional para posteriores reviões.
 
-Por fim a autênticação para fins de desenvolvimento ficou com usuario 'xxx' e senha '12345'
+Por fim a autênticação que poderia ser um dicionario de usuarios e senha, para fins de desenvolvimento, ficou com usuario 'xxx' e senha '12345'
 
 ## Tecnologias utilizadas
 
