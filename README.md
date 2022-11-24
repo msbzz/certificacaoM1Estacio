@@ -24,7 +24,7 @@ Por fim a autênticação que poderia ser um dicionario de usuarios e senha, par
 ## Tecnologias utilizadas
 
 Python,tkinter
-e
+ 
 ## Requisitos 
 
 Python3.8.10 ou superior
