@@ -1,4 +1,7 @@
-# Projeto de certifição M1 - Estácio - Grupo DEV30 
+# Projeto de certifição M1 - Estácio - Grupo DEV30 / Full Stack
+ 
+ Periodo - 2022.3
+
 
 ## Apresentação 
 
@@ -29,4 +32,8 @@ Python3.8.10 ou superior
 
 ## Executando o projeto
 
-Arquivo inicial main.py
+Executar o arquivo main.py
+
+## Video do projeto
+
+https://youtu.be/zKhqL9zlxF8
