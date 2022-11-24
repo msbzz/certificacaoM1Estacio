@@ -14,3 +14,13 @@ Por fim a autênticação para fins de desenvolvimento ficou com usuario 'xxx' e
 
 Python,tkinter
 
+## Requisitos 
+
+Python3.8.10 ou superior
+
+## Bibliotecas
+
+pip install Pillow
+pip install openpyxl
+pip install reportlab
+pip install tkcalendar
