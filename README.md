@@ -5,7 +5,7 @@
 
 ## Apresentação 
 
-Se trata de um projeto voltado para desktop que tem como objetivo criar controle ficticio de aquisição de ferramentas assim como alocação das mesmas para equipes da empresa que fosse adquirir o software. No caso especifico deste projeto a epecificação solicita apenas o cadastro, consulta e a impressão.
+Se trata de um projeto voltado para desktop que tem como objetivo criar controle ficticio de aquisição de ferramentas assim como alocação das mesmas para equipes da empresa que fosse adquirir o software 
 
 Outra particularidade é a de persistência dos dados que devem ser em planilhas excel
 
