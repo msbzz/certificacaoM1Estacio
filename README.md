@@ -1,4 +1,4 @@
-# Projeto de certifição M1 - Estácio - Grupo DEV30 / Full Stack
+# Projeto de certificação M1 - Estácio - Grupo DEV30 / Full Stack
  
  Periodo - 2022.3
 
