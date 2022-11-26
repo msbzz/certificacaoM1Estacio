@@ -40,4 +40,4 @@ Executar o arquivo main.py
 
 ## Video do projeto
 
-https://youtu.be/zKhqL9zlxF8
+https://youtu.be/EvNAIHcuzcg
