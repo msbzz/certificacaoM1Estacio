@@ -13,7 +13,9 @@ cDados = Dados()
 def consultarFerramentas():
 
     global lsDetalhe
+    global lsDados
     lsDetalhe = []
+    lsDados=[]
 
     # PONTO DE CONFIGURAÇÃO / CABEÇARIO DO TREEVIEW
     Cab = [
@@ -153,9 +155,12 @@ def consultarFerramentas():
 
         except:
             print(sys.exc_info()[0])
-
+    
+    def refresh():
+        lsDados = cDados.OpenReadXLSX(nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
+        cargaTreeView(lsDados)        
     # Tratamento da chamada a tela de detalhe da ferramenta
-    def deletarItem():
+    def deletarItem(lsDados):
 
         def FerramentaAlocada(codFerr):
            bReturn=False
@@ -182,11 +187,12 @@ def consultarFerramentas():
         print('lsDetalhe delete==>>',lsDetalhe)
         
         if FerramentaAlocada(lsDetalhe[1])== False:
-           resposta =messagebox.askokcancel(title='Confirme',message='confirma a remoção da ferramenta '+lsDetalhe[1]+' ?')
+           resposta =messagebox.askokcancel(title='Confirme',message='confirma a remoção da ferramenta '+lsDetalhe[1]+' ?',parent=master)
 
            if resposta:
               cDados.DeleteOneXLSX('ferramentas.xlsx','ferramentas',lsDetalhe[0]) 
               lsDados = cDados.OpenReadXLSX(nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
+              print('lsDados remover-->>',lsDados)
               cargaTreeView(lsDados)  
 
     def callDetFerramenta():
@@ -302,7 +308,7 @@ def consultarFerramentas():
            command=lambda: cargaTreeView(lsDados, True)).grid(row=1, column=4, padx=10)
 
     Button(frame2, font=fontTxt, text='refresh', bg=btn, activebackground=btn_ef,
-           command=lambda: cargaTreeView(lsDados)).grid(row=1, column=5, padx=1)
+           command=lambda: refresh()).grid(row=1, column=5, padx=1)
 
     #FRAME3 / TREEVIEW
     #
@@ -333,7 +339,7 @@ def consultarFerramentas():
     Button(frame4, font=fontTxt, text='listar', command=lambda: listarTreeView(Cab), bg=btn,
            activebackground=btn_ef, width=10).grid(row=3, column=5, padx=5)  # fg=forecolorBtn
 
-    Button(frame4, font=fontTxt, text='deletar', command=lambda: deletarItem(), bg=btn,
+    Button(frame4, font=fontTxt, text='deletar', command=lambda: deletarItem(lsDados), bg=btn,
            activebackground=btn_ef, width=10).grid(row=3, column=6, padx=5)  # fg=forecolorBtn
 
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
