@@ -97,11 +97,15 @@ Executar o arquivo main.py
      
      solicitações : nome,equipe, codigo da ferramenta e reservada
    
-   Todas as funcionalidades de consulta tem opção de listagens
+   Todas as funcionalidades de consulta deveriam ter as opçôes de listagens,edição e remoção
    
-   obs: devido a falta de tempo a remoção foi quase esquecida e por isso implementada apenas ferramentas onde é verificado
-        se existe alguma solicitação podendo a mesma se encontrar alocada ou reservada. A ideia era ter o mesmo conceito em consulta
-        de funcionarios. Já em solicitações seria uma remoção direta.
+   obs: no caso da remoção e edição estas deixadas para o final devido a falta de tempo. A remoção foi implementada apenas ferramentas 
+        onde é verificado se existe alguma solicitação podendo a mesma se encontrar alocada ou reservada. A ideia era ter o mesmo conceito 
+        em consulta de funcionários. Já em solicitações seria uma remoção direta. No caso da edição deveria ter sido aplicado o mesmo
+        conceito de verificação de deleção em ferramentas e funcionários porem no caso das solicitaçoes campos como nome,cpf,equipe e codigo da 
+        ferramenta não estariam habilitados para edição pois são consideradas chaves estrangeiras ou seja informações que precisam existir nas
+        planilhas de ferramentas e funcionários.
+       
 
 
 ### Video do projeto
