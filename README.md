@@ -42,25 +42,28 @@ Executar o arquivo main.py
    
     Campos Ferramentas
      
-      - codigo : edição livre 
+      - codigo : edição livre  (campo unico)
       - descrição : edição livre 
-      - fabricante : pré definido em lista  
-      - voltagem  : pré definido em lista 
+      - fabricante : pré definido em 'listasFerramentas.xlsx' worksheet 'fabricante'   
+      - voltagem  : pré definido em 'listasFerramentas.xlsx' worksheet 'voltagem' 
       - part number : edição livre 
-      - unidade de medida : pré definido em lista 
-      - tipo de ferramenta : pré definido em lista 
-      - material : pré definido em lista 
-         
+      - unidade de medida :pré definido em 'listasFerramentas.xlsx' worksheet 'unidade de medida' 
+      - tipo de ferramenta : pré definido em 'listasFerramentas.xlsx' worksheet 'tipo de ferramentas'
+      - material : pré definido em 'listasFerramentas.xlsx' worksheet 'material'
+               
+      obs: a critica e realizada na confirmação onde é exigida a obrigatoriedade de  
+           todos os campos assim como a verificado se a chave primaria(campo único) estar repetido
+           
     Campos Funcionários 
 
       - nome completo : edição livre (campo unico) 
       - cpf : edição livre  (campo unico)
       - telefone : edição livre 
-      - turno : pré definido em lista 
-      - equipe : pré definido em lista 
+      - turno : pré definido em 'listasFuncionarios.xlsx' worksheet 'turno' 
+      - equipe : pré definido em 'listasFuncionarios.xlsx' worksheet 'equipes' 
                
-       obs: a critica e realizada na confirmação onde é exigida a obrigatoriedade de  
-           todos os campos assim como a verificado se a chave primeria estas repetida 
+      obs: a critica e realizada na confirmação onde é exigida a obrigatoriedade de  
+           todos os campos assim como a verificado se a chave primaria(campo único) estar repetido
         
    Campos Solicitações
       
@@ -73,43 +76,27 @@ Executar o arquivo main.py
             ja se encontra alocada ou reservada onde e apresentado com quem está e qual a previsão 
             de entrega ou saida
       
-     - data de saida
-     - hora de saida
+     - data da saida : fornecida por um calendário usando data atual 
+     - hora da saida :pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
      
-     - data de devolução
-     - hora de devolução
-                 No de estar reservadar é apresentada a data da saida podendo ser liberada<br>
-                 no caso de queda da reserva<br>
-                 <br>
-                 - datas de saida e devolução<br> 
-               <br>
-                 são definidas atravez de calendarios no qual a<br> 
-                 data atual já vem selecionada como opção de saida porem no caso de reserva<br> 
-                 essa data e acrescida de um dia<br>
-                 <br>
-                 - horário de saida e devolução<br> 
-                
-                 são pré definidos em lista<br> 
-                 <br>
-                 - motivo<br><br> 
-                 Pré definido em lista<br> 
-                 <br>
-              obs: critica é realizada na confirmação onde é exigida a obrigatoriedade de todos os campos<br> 
-            <br><br>
-              <div class="subtitle">Consultas</div><br>
-             
-              Ferramentas<br>
-              Funcionarios<br>
-              Solicitações<br>
-              <br><br>
-              As consultas ou filtros, são feitas diretamente na planilha   
-              dependendo do modulo e os filtros são particulares a cada<br>
-              modulo<br>
-              <br>
- 
-              <br>
-           obs: todas as funcionalidades de consulta tem opção de<br>
-                listagem <br>
+     - data da devolução : fornecida por um calendário usando data atual 
+     - hora da devolução : pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
+     
+     
+      obs : no optar por reservar, data da saida e devolução serão acrescidas de um dia considerando a data autal 
+      
+     - motivo : pré definido em 'listasSolicitacoes.xlsx' worksheet 'motivo'
+        
+### As Consultas 
+      
+   As consultas ou filtros, são feitas diretamente na respectiva planilha dependendo seu módulo que conterão filtros 
+   são particulares assunto Ferramentas,Funcionarios ou Solicitações
+   
+   Todas as funcionalidades de consulta tem opção de listagems
+   
+   obs: devido a falta de tempo a remoção foi quase esquecida por isso implementada apenas ferramentas onde é verificado
+        em solicitações se a mesma se encontra alocada ou reservada. A ideia era ter o mesmo conceito em consulta
+        de funcionarios e já em solicitações seria uma remoção direta.
 
 
 ### Video do projeto
