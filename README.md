@@ -65,38 +65,42 @@ Executar o arquivo main.py
       obs: a critica e realizada na confirmação onde é exigida a obrigatoriedade de  
            todos os campos assim como a verificado se a chave primaria(campo único) estar repetido
         
-   Campos Solicitações
+    Campos Solicitações
       
       - nome : pré definido em lista vindo da planilha funcionarios.xlsx 
       - cpf : pré definido em lista vindo da planilha funcionarios.xlsx 
       - equipe : pré definido em lista vindo da planilha funcionarios.xlsx
       - codigo da ferramenta : pré definido em lista vindo da planilha ferramentas.xlsx 
                 
-       obs: esse campo é verificado na planilha de solicitações afim de saber se a ferramenta 
+      obs: esse campo é verificado na planilha de solicitações afim de saber se a ferramenta 
             ja se encontra alocada ou reservada onde e apresentado com quem está e qual a previsão 
             de entrega ou saida
       
-     - data da saida : fornecida por um calendário usando data atual 
-     - hora da saida :pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
-     
-     - data da devolução : fornecida por um calendário usando data atual 
-     - hora da devolução : pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
-     
+      - data da saida : fornecida por um calendário usando data atual 
+      - hora da saida :pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
+      - data da devolução : fornecida por um calendário usando data atual 
+      - hora da devolução : pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
      
       obs : no optar por reservar, data da saida e devolução serão acrescidas de um dia considerando a data autal 
       
-     - motivo : pré definido em 'listasSolicitacoes.xlsx' worksheet 'motivo'
+      - motivo : pré definido em 'listasSolicitacoes.xlsx' worksheet 'motivo'
         
 ### As Consultas 
       
-   As consultas ou filtros, são feitas diretamente na respectiva planilha dependendo seu módulo que conterão filtros 
-   são particulares assunto Ferramentas,Funcionarios ou Solicitações
+   As consultas ou filtros, são feitas diretamente na respectiva planilha dependendo do assunto. Cada consulta contem 
+   filtros especificos por assunto ou seja 
+     
+     ferramentas : codigo,descricao,fabricante e material
+     
+     funcionarios : nome,cpf,turno e equipe
+     
+     solicitações : nome,equipe, codigo da ferramenta e reservada
    
-   Todas as funcionalidades de consulta tem opção de listagems
+   Todas as funcionalidades de consulta tem opção de listagens
    
-   obs: devido a falta de tempo a remoção foi quase esquecida por isso implementada apenas ferramentas onde é verificado
-        em solicitações se a mesma se encontra alocada ou reservada. A ideia era ter o mesmo conceito em consulta
-        de funcionarios e já em solicitações seria uma remoção direta.
+   obs: devido a falta de tempo a remoção foi quase esquecida e por isso implementada apenas ferramentas onde é verificado
+        se existe alguma solicitação podendo a mesma se encontrar alocada ou reservada. A ideia era ter o mesmo conceito em consulta
+        de funcionarios. Já em solicitações seria uma remoção direta.
 
 
 ### Video do projeto
