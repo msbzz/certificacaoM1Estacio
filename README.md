@@ -81,7 +81,8 @@ Executar o arquivo main.py
       - data da devolução : fornecida por um calendário usando data atual 
       - hora da devolução : pré definido em 'listasSolicitacoes.xlsx' worksheet 'horario'
      
-      obs : no optar por reservar, data da saida e devolução serão acrescidas de um dia considerando a data autal 
+      obs : no optar por reservar, data da saida e devolução serão acrescidas de um dia considerando a
+            data autal 
       
       - motivo : pré definido em 'listasSolicitacoes.xlsx' worksheet 'motivo'
         
