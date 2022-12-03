@@ -9,8 +9,30 @@ def cadastroFerramentas():
     
     cData=Dados()
 
+    lsDetalhe=cData.readFileTemp()
+    
+    bEdicao=False
+    """ 
+    lsDetalhe=[
+          6,
+          'SDSE3',
+          'FERRAMENTA5',
+          'DEXTER',
+          '110',
+          'SPW-WX',
+          '67',
+          'METRICAS',
+          'CHAVES COMBINADAS',
+          'AÇO RÁPIDO',
+    ]
+    """
+
+    if len(lsDetalhe)!=0 :
+        bEdicao=True 
+
+
     def limparCampos():
-         
+       if bEdicao==False:  
         _sCodigo.set('')
         _sDescricao.set('')
         _sFabricante.set('')
@@ -20,8 +42,17 @@ def cadastroFerramentas():
         _sUnidade.set('')
         _sTpFerramenta.set('')
         _sMaterial.set('')
+       else :
+        _sCodigo.set(lsDetalhe[1])
+        _sDescricao.set(lsDetalhe[2])
+        _sFabricante.set(lsDetalhe[3])
+        _sVoltagem.set(lsDetalhe[4])
+        _sPartNumber.set(lsDetalhe[5])
+        _sTamanho.set(lsDetalhe[6])
+        _sUnidade.set(lsDetalhe[7])
+        _sTpFerramenta.set(lsDetalhe[8])
+        _sMaterial.set(lsDetalhe[9])  
 
-         
     def salvar():
         codigo=_sCodigo.get()
         descricao=_sDescricao.get()
@@ -39,15 +70,31 @@ def cadastroFerramentas():
             else:
                 return False 
         
-        def existeDuplicidade(codigo):
+        def existeDuplicidade(codigo,bEdicao=False):
             bReturn= False  
+            print
             # se a planilha não existir ainda precisa de try
             try:
                #codigo esta na primeira coluna por isso não preciso das demais
                nItens=0 
                ls2=cData.OpenFindDateXLSX('ferramentas.xlsx','ferramentas',codigo,nItens)
                if len(ls2)>0:
-                  bReturn = True #vai bloquear
+
+                  if bEdicao==False:  
+                     bReturn = True #vai bloquear
+                  else:
+                     #AKI compara se o part number for diferent quer dizer q existe 
+                     #    o codigo em outra linha da planilha 
+                     #   
+                     #    lsDetalhe vem da consulta e  ls2 da leitura OpenFindDateXLSX
+                     #
+                     #    Não esquecendo que a consulta inclui a linha do grid e 
+                     #    a leitura não. Por isso a diferença dos indices
+                     #  
+                      
+
+                     if lsDetalhe[5]!=ls2[4]:
+                         bReturn = True #vai bloquear
             except:
                pass   
 
@@ -55,6 +102,44 @@ def cadastroFerramentas():
 
         def msgBox(msg):
           messagebox.showerror('Erro',msg,parent=master)
+        
+        def FerramentaAlocada(codFerr):
+               bReturn = False
+               nItensCabSolicitacoes = 9
+               ls2 = cData.OpenFindDateXLSX(
+                'solicitacoes.xlsx', 'solicitacoes', codFerr, nItensCabSolicitacoes)
+
+               # verificar data da entrega maior q data atual
+               if len(ls2) > 0:
+                   print('dados ferr==>>>', ls2)
+                   #['827.177.323.91', 'Marco', 'NOITE', 'DJS-IW-90', '13/11/2022', '09:00:00', '14/11/2022', '10:00:00', 'TRABALHO', 'SIM']
+
+                   if ls2[9] != 'SIM':
+                       msg = 'Ferramenta não pode ser editada devido a estar alocada com ' + \
+                        ls2[1] + ', com previsão de entrega para ' + \
+                        ls2[6] + ' as ' + ls2[7]
+                   else:
+                       msg = 'Ferramenta não pode ser editada devido a estar reservada para ' + \
+                        ls2[1] + ', com previsão de saida para ' + \
+                        ls2[4] + ' as ' + ls2[5]+' a ser confirmada'
+
+                   messagebox.showinfo('Erro', msg, parent=master)
+
+                   bReturn = True
+
+               return bReturn
+
+        def camposValidosEdicao():
+              bReturn=True
+              if existeDuplicidade(codigo,bEdicao):
+                  msg='codigo já cadastrado, verifique.'
+                  msgBox(msg)
+                  return  False
+
+              elif FerramentaAlocada(codigo):
+                   return  False
+ 
+              return bReturn   
 
         def camposValidos():
            #se não cair em nenhuma critica sai como true
@@ -113,9 +198,10 @@ def cadastroFerramentas():
 
 
            return bReturn
-
-        if camposValidos():  
-            dadosCadastro=[
+        
+        if bEdicao==False: 
+           if camposValidos():  
+               dadosCadastro=[
                     codigo,
                     descricao,
                     fabricante,
@@ -127,10 +213,30 @@ def cadastroFerramentas():
                     material
 
                     ]
-                    
-            cData.createInsertXLSX('ferramentas.xlsx','ferramentas',dadosCadastro)
-            limparCampos()
+                   
+               cData.createInsertXLSX('ferramentas.xlsx','ferramentas',dadosCadastro)
+               limparCampos()
 
+        elif camposValidosEdicao():
+               dadosCadastro=[
+                    lsDetalhe[0],
+                    codigo,
+                    descricao,
+                    fabricante,
+                    voltagem,
+                    partNumber,
+                    tamanho,
+                    unidade,
+                    tpFerramenta,
+                    material
+
+                    ]
+                   
+               resp=cData.UpdateOneXLSX('ferramentas.xlsx','ferramentas',dadosCadastro)
+
+               if resp==True:
+                    messagebox.showinfo('Edição', 'Edição realizada com sucesso !')
+                    master.destroy()
     #AKI PRODUCAO 
     master =  Toplevel()
     #AKI DEBUG
@@ -171,19 +277,42 @@ def cadastroFerramentas():
     #FRAME1 / TITULO
     frame1=Frame(master,width=900,height=100, bg= backGR)#,bg='green' 
     frame1.grid(row=0,column=0,columnspan=3,sticky='nsew')
-    lblTit=Label(frame1, text="CADASTRO DE FERRAMENTAS", font= ("Calibri",25, "bold"), bg=backGR)
+
+    msgTitle=""
+
+    if bEdicao==True:
+         msgTitle="EDIÇÃO DE FERRAMENTAS"
+    else:
+         msgTitle="CADASTRO DE FERRAMENTAS" 
+
+    lblTit=Label(frame1, text= msgTitle, font= ("Calibri",25, "bold"), bg=backGR)
     lblTit.grid(row=0,column=0,pady=40,padx=240) 
     
-     
+    
+
     #FRAME2 / LABELS e ENTRIES
     frame2=Frame(master,width=600,height=500, bg=backGR)
     frame2.grid(row=1,column=0,sticky='nsew')
     
+
+    #VARIAVEIS UTILIZADAS NOS ENTRYS
+    _sCodigo=StringVar()
+    _sDescricao=StringVar()
+    _sFabricante=StringVar()
+    _sVoltagem=StringVar()
+    _sPartNumber=StringVar()
+    _sTamanho=StringVar()
+    _sUnidade=StringVar()
+    _sTpFerramenta=StringVar()
+    _sMaterial=StringVar() 
+    
+    #Função adaptada para edição
+    limparCampos() 
     #CODIGO
     Label(frame2, text="CODIGO", font=("Calibri", 12),width=nWcaption,bg=backGR ).grid(row=linElementos,
                                                            column=0,ipady=nIPADY,padx=nIPADX)
 
-    _sCodigo=StringVar() 
+     
     Entry(frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sCodigo).grid(row=linElementos,
                                                                      column=1,pady=nPADY,
                                                                     padx=nPADX)
@@ -192,7 +321,7 @@ def cadastroFerramentas():
     #DESCRICAO
     Label (frame2, text="DESCRICAO", font=("Calibri", 12),width=nWcaption, bg=backGR).grid(row=linElementos+1,
                                                                   column=0,ipady=nIPADY,padx=nIPADX)  
-    _sDescricao=StringVar()
+    
     Entry(frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sDescricao).grid(row=linElementos+1,column=1,
                                                                          pady=nPADY,padx=nPADX)
 
@@ -203,7 +332,6 @@ def cadastroFerramentas():
     
     # get lista 
     lst=cData.getList(nomePlanilhaDeListas,'fabricante')
-    _sFabricante=StringVar()
     ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",textvariable=_sFabricante).grid(row=linElementos+2,column=1,pady=nPADY,padx=nPADX)
     
     #VOLTAGEM /combo box 
@@ -214,7 +342,7 @@ def cadastroFerramentas():
     # get lista 
     lst=cData.getList(nomePlanilhaDeListas,'voltagem')
     print('lst-->>',lst)
-    _sVoltagem=StringVar()
+    
     ttk.Combobox ( frame2,value=lst,font=("Calibri", 12),state="readonly",width=nWinfoCombo,
                           textvariable=_sVoltagem).grid(row=linElementos+3,
                                                          column=1,pady=nPADY,
@@ -226,7 +354,7 @@ def cadastroFerramentas():
                                                                     column=0,
                                                                     pady=nIPADY,
                                                                     padx=nIPADX)
-    _sPartNumber=StringVar()
+    
     Entry(frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sPartNumber).grid(row=linElementos+4,column=1,pady=nPADY,padx=nPADX)
     
     
@@ -235,7 +363,7 @@ def cadastroFerramentas():
                                                                column=0,pady=nIPADY,
                                                                 padx=nIPADX)
     
-    _sTamanho=StringVar() 
+     
     Entry (frame2,bd=2,font=('Calibri',12),width=nWinfo,textvariable=_sTamanho,).grid(row=linElementos+5,
                                                                         column=1,pady=nIPADY,
                                                                         padx=nIPADX) 
@@ -246,7 +374,6 @@ def cadastroFerramentas():
                                                                          pady=nIPADY,padx=nIPADX)
     #combo box UNIDADE DE MEDIDA
     lst=cData.getList(nomePlanilhaDeListas,'unidade de medida')    
-    _sUnidade=StringVar()
     ttk.Combobox (frame2,value=lst,font=("Calibri", 12),textvariable=_sUnidade,state="readonly",width=nWinfoCombo).grid(row=linElementos+6,column=1,
                                                                                                    pady=nIPADY,padx=nIPADX)    
 
@@ -257,7 +384,6 @@ def cadastroFerramentas():
                                                                                padx=nIPADX)
     #combo box 
     lst=cData.getList(nomePlanilhaDeListas,'tipo de ferramentas')
-    _sTpFerramenta=StringVar()
     ttk.Combobox (frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",
                         textvariable=_sTpFerramenta).grid(row=linElementos+7,
                                                         column=1,pady=nIPADY,
@@ -269,7 +395,6 @@ def cadastroFerramentas():
                                                                 padx=nIPADX)
     #combo box 
     lst=cData.getList(nomePlanilhaDeListas,'material') 
-    _sMaterial=StringVar()  
     ttk.Combobox (frame2,value=lst,font=("Calibri", 12),width=nWinfoCombo,state="readonly",textvariable=_sMaterial).grid(row=linElementos+8,
                                                                                                  column=1,pady=nIPADY,
                                                                                                    padx=nIPADX)    
@@ -296,6 +421,9 @@ def cadastroFerramentas():
 
     lbel_imag=  Label(master, bd= 0,image=my_img).place(x=650,y=135) 
     lbel_imag.pack()
+
+    
+    
     #AKI DEBUG
     #master.mainloop()
  

@@ -56,6 +56,7 @@ class Dados():
         pathDestinoArq  = self.getPathPlanilhas(nome_e_Extensao,self.pathDestino)
 
         book.save(pathDestinoArq)
+    
     def DeleteOneXLSX(self, nome_e_Extensao, nomePlanilha,index):
         #RETORNA UMA LISTA DE LISTAS DE REGISTROS
         #MATRIZ
@@ -65,6 +66,40 @@ class Dados():
         infoCells.delete_rows(int(index), 1)
 
         book.save('planilhas/'+nome_e_Extensao)
+
+    def UpdateOneXLSX(self, nome_e_Extensao, nomePlanilha,ls=[]):
+        #RETORNA UMA LISTA DE LISTAS DE REGISTROS
+        #MATRIZ
+        #CADA LINHA É UM REGISTRO OU LINHA DA PLANILHA
+        book = self.openpyXL(nome_e_Extensao,nomePlanilha)
+        infoCells = book[nomePlanilha]
+        nRow=0
+        indiceLinha  = int(ls[0])
+
+        for rows in infoCells.iter_rows(min_row=1):
+            
+            nRow+=1
+            if nRow==indiceLinha:
+                #print(rows[0].value)
+                rows[0].value=ls[1]
+                rows[1].value=ls[2]
+                rows[2].value=ls[3]
+                rows[3].value=ls[4]
+                rows[4].value=ls[5]
+                rows[5].value=ls[6]
+                rows[6].value=ls[7]
+                rows[7].value=ls[8]
+                rows[8].value=ls[9]
+                break 
+
+        #for i in range(0,nCols+1):
+        # valido para caracteres
+        # converte para maiusculo e compara 
+        
+        #if rows[0].value.upper()==valor.upper():
+
+        book.save('planilhas/'+nome_e_Extensao)
+        return True
 
 
     def OpenReadXLSX(self, nome_e_Extensao, nomePlanilha,lsCab=[],linha=0):
@@ -158,7 +193,7 @@ class Dados():
         
     # How to read a file
     def readFileTemp(self):
-        
+        import os 
         ls=[]
         sTemp=''
         try:
@@ -167,7 +202,10 @@ class Dados():
                sTemp=line[:-1]
                ls.append(sTemp)
         
-           arquivoTemp.close()
+           arquivoTemp.close() 
+           if os.path.exists("newfileLista.txt"):
+              os.remove("newfileLista.txt")
+
         except:
             pass
         

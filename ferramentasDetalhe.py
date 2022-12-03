@@ -8,7 +8,7 @@ from dadosXLSX import Dados
 def detalheFerramenta():
     
     cData=Dados()
-    
+     
     #PRODUÇÃO
     lsDetalhe=cData.readFileTemp()
     #DEGUB

@@ -7,6 +7,7 @@ from dadosXLSX import Dados
 from cPrintTreeView import PrintTreeview
 
 from ferramentasDetalhe import detalheFerramenta
+from ferramentasCadastro import cadastroFerramentas
 cDados = Dados()
 
 
@@ -15,7 +16,7 @@ def consultarFerramentas():
     global lsDetalhe
     global lsDados
     lsDetalhe = []
-    lsDados=[]
+    lsDados = []
 
     # PONTO DE CONFIGURAÇÃO / CABEÇARIO DO TREEVIEW
     Cab = [
@@ -155,45 +156,61 @@ def consultarFerramentas():
 
         except:
             print(sys.exc_info()[0])
-    
+
     def refresh():
-        lsDados = cDados.OpenReadXLSX(nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
-        cargaTreeView(lsDados)        
+        lsDados = cDados.OpenReadXLSX(
+            nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
+        cargaTreeView(lsDados)
     # Tratamento da chamada a tela de detalhe da ferramenta
+
+    def EditarItem(lsDados):
+        cadastroFerramentas()
+        #recarrega info da planilha
+        lsDados = cDados.OpenReadXLSX(
+                    nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
+        cargaTreeView(lsDados)
+
+
     def deletarItem(lsDados):
 
         def FerramentaAlocada(codFerr):
-           bReturn=False
-           nItensCabSolicitacoes=9
-           ls2=cDados.OpenFindDateXLSX('solicitacoes.xlsx','solicitacoes',codFerr,nItensCabSolicitacoes)
+            bReturn = False
+            nItensCabSolicitacoes = 9
+            ls2 = cDados.OpenFindDateXLSX(
+                'solicitacoes.xlsx', 'solicitacoes', codFerr, nItensCabSolicitacoes)
 
-           #verificar data da entrega maior q data atual
-           if len(ls2)>0:
-               print('dados ferr==>>>',ls2)
-               #['827.177.323.91', 'Marco', 'NOITE', 'DJS-IW-90', '13/11/2022', '09:00:00', '14/11/2022', '10:00:00', 'TRABALHO', 'SIM']
-            
-               if ls2[9]!='SIM':
-                 msg='Ferramenta não pode ser removida devido a estar alocada com ' + ls2[1] + ', com previsão de entrega para ' + ls2[6] + ' as ' + ls2[7]
-               else:   
-                 msg='Ferramenta não pode ser removida devido a estar reservada para ' + ls2[1] + ', com previsão de saida para ' + ls2[4] + ' as ' + ls2[5]+' a ser confirmada'  
+            # verificar data da entrega maior q data atual
+            if len(ls2) > 0:
+                print('dados ferr==>>>', ls2)
+                #['827.177.323.91', 'Marco', 'NOITE', 'DJS-IW-90', '13/11/2022', '09:00:00', '14/11/2022', '10:00:00', 'TRABALHO', 'SIM']
 
-               messagebox.showinfo('Erro',msg,parent=master)
+                if ls2[9] != 'SIM':
+                    msg = 'Ferramenta não pode ser removida devido a estar alocada com ' + \
+                        ls2[1] + ', com previsão de entrega para ' + \
+                        ls2[6] + ' as ' + ls2[7]
+                else:
+                    msg = 'Ferramenta não pode ser removida devido a estar reservada para ' + \
+                        ls2[1] + ', com previsão de saida para ' + \
+                        ls2[4] + ' as ' + ls2[5]+' a ser confirmada'
 
-               bReturn=True
-           
-           return bReturn 
-        
-        lsDetalhe=cDados.readFileTemp()
-        print('lsDetalhe delete==>>',lsDetalhe)
-        
-        if FerramentaAlocada(lsDetalhe[1])== False:
-           resposta =messagebox.askokcancel(title='Confirme',message='confirma a remoção da ferramenta '+lsDetalhe[1]+' ?',parent=master)
+                messagebox.showinfo('Erro', msg, parent=master)
 
-           if resposta:
-              cDados.DeleteOneXLSX('ferramentas.xlsx','ferramentas',lsDetalhe[0]) 
-              lsDados = cDados.OpenReadXLSX(nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
-              print('lsDados remover-->>',lsDados)
-              cargaTreeView(lsDados)  
+                bReturn = True
+
+            return bReturn
+
+        lsDetalhe = cDados.readFileTemp()
+        if FerramentaAlocada(lsDetalhe[1]) == False:
+            resposta = messagebox.askokcancel(
+                title='Confirme', message='confirma a remoção da ferramenta '+lsDetalhe[1]+' ?', parent=master)
+
+            if resposta:
+                cDados.DeleteOneXLSX('ferramentas.xlsx',
+                                     'ferramentas', lsDetalhe[0])
+                #recarrega info da planilha
+                lsDados = cDados.OpenReadXLSX(
+                    nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
+                cargaTreeView(lsDados)
 
     def callDetFerramenta():
         try:
@@ -342,12 +359,15 @@ def consultarFerramentas():
     Button(frame4, font=fontTxt, text='deletar', command=lambda: deletarItem(lsDados), bg=btn,
            activebackground=btn_ef, width=10).grid(row=3, column=6, padx=5)  # fg=forecolorBtn
 
+    Button(frame4, font=fontTxt, text='editar', command=lambda: EditarItem(lsDados), bg=btn,
+           activebackground=btn_ef, width=10).grid(row=3, column=7, padx=5)  # fg=forecolorBtn
+
     tv.grid(column=0, row=3, columnspan=3, pady=5, stick='w')
 
     Button(master, font=fontTxt, text="retornar", width=16, height=2, bg=btn,
            activebackground=btn_ef, command=lambda: sairDetalhe()).place(x=696, y=544)
     # AKI DEBUG
-    #master.mainloop()
+    # master.mainloop()
 
 
-#consultarFerramentas()
+# consultarFerramentas()
