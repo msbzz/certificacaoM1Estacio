@@ -21,7 +21,7 @@
  acompanharem a evolução do projeto e assim como ter a capacidade de atuarem e compreenderem o codigo. 
  
    Para isso foi criado uma pasta chamada 'estudos' que contem desde testes especificos a funcionalidades como sugestão de 
- links de tutoriais utilizados como base para o desenvolvimento.
+ links de tutoriais utilizados como base de nosso desenvolvimento.
  
  Acho que esta claro que essa compreensão do que foi feito depende do interesse de cada um.
  
