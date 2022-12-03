@@ -15,8 +15,16 @@
 
  Outra observação é a de que por trabalharmos em sistemas operacionais diferentes, algumas telas tiveram renderização diferentes, no caso a tela de solicitações vista na gravação no ubuntu renderiza de forma diferente no windows 10. Infelizmente nosso tempo estava muito reduzido pois nosso grupo conseguiu iniciar no dia 31/10 e a entrega em 27//11  onde surgiu uma segunda dificuladade, a disponibilidade individual de tempo para o desenvolvimento que devido estar em função da vida cotidiana de cada um, influenciava diretamente no tempo de resposta e por sua vez nos resultados que estariam definindo os rumos do projeto.
 
- Sendo assim era necessário primeiro concluir a parte funcional para posteriores reviões.
-
+  Sendo assim era necessário primeiro concluir a parte funcional para posteriores reviões 
+ 
+  Outro ponto foi o tentar dar o máximo de embasamento no conhecimento das fontes uitlizadas aos colegas no sentido de 
+ acompanharem a evolução do projeto e assim como ter a capacidade de atuarem e compreenderem o codigo. 
+ 
+   Para isso foi criado uma pasta chamada 'estudos' que contem desde testes especificos a funcionalidades como sugestão de 
+ links de tutoriais utilizados como base para o desenvolvimento.
+ 
+ Acho que esta claro que essa compreensão do que foi feito depende do interesse de cada um.
+ 
  Por fim a autênticação que poderia ser um dicionario de usuarios e senha, para fins de desenvolvimento, ficou com usuario 'xxx' e senha '12345'
 
 ### Tecnologias utilizadas
@@ -106,6 +114,7 @@ Executar o arquivo main.py
         ferramenta não estariam habilitados para edição pois são consideradas chaves estrangeiras ou seja informações que precisam existir nas
         planilhas de ferramentas e funcionários.
        
+
 
 
 ### Video do projeto
