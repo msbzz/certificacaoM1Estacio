@@ -25,7 +25,7 @@
  
  Acho que esta claro que essa compreensão do que foi feito depende do interesse de cada um.
  
- Por fim a autênticação que poderia ser um dicionario de usuarios e senha, para fins de desenvolvimento, ficou com usuario 'xxx' e senha '12345'
+ Por fim a autênticação poderia seguido o principio dos cadastros em planilhas de qualquer formaa, e senha, para fins de desenvolvimento, ficou com usuario 'xxx' e senha '12345'
 
 ### Tecnologias utilizadas
 
@@ -107,8 +107,11 @@ Executar o arquivo main.py
    
    Todas as funcionalidades de consulta deveriam ter as opçôes de listagens,edição e remoção
    
-   obs: no caso da remoção e edição estas deixadas para o final devido a falta de tempo. A remoção foi implementada apenas ferramentas 
-        onde é verificado se existe alguma solicitação podendo a mesma se encontrar alocada ou reservada. A ideia era ter o mesmo conceito 
+   obs: no caso da remoção e edição estas deixadas para o final devido a falta de tempo.Com isso tanto a remoção como a edição 
+   foram implementadas apenas no módulo de ferramentas onde para ambos os casos, é verificado se existe alguma solicitação podendo 
+   a mesma se encontrar alocada ou reservada o que impedirá a operação. 
+   
+    A ideia era ter o mesmo conceito 
         em consulta de funcionários. Já em solicitações seria uma remoção direta. No caso da edição deveria ter sido aplicado o mesmo
         conceito de verificação de deleção em ferramentas e funcionários porem no caso das solicitaçoes campos como nome,cpf,equipe e codigo da 
         ferramenta não estariam habilitados para edição pois são consideradas chaves estrangeiras ou seja informações que precisam existir nas
@@ -119,5 +122,5 @@ Executar o arquivo main.py
 
 ### Video do projeto
 
-https://youtu.be/Mtfv4Wa3tLw
+https://youtu.be/ECERHzayA5w
 
