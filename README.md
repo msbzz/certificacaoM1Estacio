@@ -116,15 +116,14 @@ Executar o arquivo main.py
 
 https://youtu.be/ECERHzayA5w
 
-0:07 ####As planilhas - Apresentação das planilhas usadas nos cadastros e as de listagens
+0:07 #### As planilhas - Apresentação das planilhas usadas nos cadastros e as de listagens
 
-1:03 ####Os módulos - Apresentação dos módulos
+1:03 #### Os módulos - Apresentação dos módulos
 
-1:44 ####Os cadastros - Apresentação da utilização dos combos carregados em função da planilha e realização de um 
+1:44 #### Os cadastros - Apresentação da utilização dos combos carregados em função da planilha e realização de um 
                        cadastro de funcionários apresentando a critica ao cpf
 
-3:47 ####As consultas
-  Apresentação da utilização dos filtros e da s listagem do conteudo do grid
+3:47 #### As consultas - Apresentação da utilização dos filtros e da s listagem do conteudo do grid
 
 5:00 ####As solicitações#### 
    Realização de um cadastro apresentado a interdependencia entre modulos de ferramentas e funcionários. 
