@@ -116,24 +116,35 @@ Executar o arquivo main.py
 
 https://youtu.be/ECERHzayA5w
 
-0:07 #### As planilhas - Apresentação das planilhas usadas nos cadastros e as de listagens
+ #### 0:07  As planilhas 
+     
+     Apresentação das planilhas usadas nos cadastros e as de listagens
 
-1:03 #### Os módulos - Apresentação dos módulos
+#### 1:03 Os módulos  
+    
+      Apresentação dos módulos
 
-1:44 #### Os cadastros - Apresentação da utilização dos combos carregados em função da planilha e realização de um 
-                       cadastro de funcionários apresentando a critica ao cpf
+#### 1:44 Os cadastros 
 
-3:47 #### As consultas - Apresentação da utilização dos filtros e da s listagem do conteudo do grid
+   Apresentação da utilização dos combos carregados em função da planilha e realização de um 
+    cadastro de funcionários apresentando a critica ao cpf.
 
-5:00 ####As solicitações#### 
+#### 3:47 As consultas 
+ 
+    Apresentação da utilização dos filtros e da s listagem do conteudo do grid
+
+#### 5:00 As solicitações
+
    Realização de um cadastro apresentado a interdependencia entre modulos de ferramentas e funcionários. 
    Apresentação do conceito de reserva não permitindo que utilize a data atual. Utilização do filtro
    
  
-8:22 Removendo ferramentas 
+#### 8:22 Removendo ferramentas 
+ 
    Apresentação da interdependencia entre modulos de ferramentas e solicitações que bloqueia a remoção
   
-9:23 Edição de ferramentas  
+#### 9:23 Edição de ferramentas  
+   
    Apresentação da interdependencia entre modulos de ferramentas e solicitações que bloqueia 
    a edição ssim como a critica a edição do codigo que leve a duplicidade.
 
