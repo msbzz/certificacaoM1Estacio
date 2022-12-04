@@ -148,4 +148,5 @@ https://youtu.be/ECERHzayA5w
    Apresentação da interdependência entre modulos de ferramentas e solicitações que bloqueia 
    a edição ssim como a critica a edição do codigo que leve a duplicidade.
 
+### Obs: esse video pode ser assistido em velocidade 1.5
 
