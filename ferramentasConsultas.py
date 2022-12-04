@@ -164,11 +164,17 @@ def consultarFerramentas():
     # Tratamento da chamada a tela de detalhe da ferramenta
 
     def EditarItem(lsDados):
-        cadastroFerramentas()
-        #recarrega info da planilha
-        lsDados = cDados.OpenReadXLSX(
+        try:
+            with open('newfileLista.txt', 'r') as f:
+               cadastroFerramentas()
+               #recarrega info da planilha
+               lsDados = cDados.OpenReadXLSX(
                     nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
-        cargaTreeView(lsDados)
+               cargaTreeView(lsDados)
+        except IOError:
+            messagebox.showinfo('Aviso', 'Necessário selecionar uma linha') 
+
+
 
 
     def deletarItem(lsDados):
@@ -199,19 +205,26 @@ def consultarFerramentas():
 
             return bReturn
 
-        lsDetalhe = cDados.readFileTemp()
-        if FerramentaAlocada(lsDetalhe[1]) == False:
-            resposta = messagebox.askokcancel(
-                title='Confirme', message='confirma a remoção da ferramenta '+lsDetalhe[1]+' ?', parent=master)
+        try:
+            with open('newfileLista.txt', 'r') as f:
+               lsDetalhe = cDados.readFileTemp()
+               if FerramentaAlocada(lsDetalhe[1]) == False:
+                  resposta = messagebox.askokcancel(
+                  title='Confirme', message='confirma a remoção da ferramenta '+lsDetalhe[1]+' ?', parent=master)
 
-            if resposta:
-                cDados.DeleteOneXLSX('ferramentas.xlsx',
+                  if resposta:
+                     cDados.DeleteOneXLSX('ferramentas.xlsx',
                                      'ferramentas', lsDetalhe[0])
-                #recarrega info da planilha
-                lsDados = cDados.OpenReadXLSX(
-                    nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
-                cargaTreeView(lsDados)
+                     #recarrega info da planilha
+                     lsDados = cDados.OpenReadXLSX(
+                     nomePlanilhaDeConsulta, 'ferramentas', Cab, 1)
+                     cargaTreeView(lsDados)
 
+        except IOError:
+            messagebox.showinfo('Aviso', 'Necessário selecionar uma linha')        
+        
+
+        
     def callDetFerramenta():
         try:
             with open('newfileLista.txt', 'r') as f:

@@ -12,20 +12,7 @@ def cadastroFerramentas():
     lsDetalhe=cData.readFileTemp()
     
     bEdicao=False
-    """ 
-    lsDetalhe=[
-          6,
-          'SDSE3',
-          'FERRAMENTA5',
-          'DEXTER',
-          '110',
-          'SPW-WX',
-          '67',
-          'METRICAS',
-          'CHAVES COMBINADAS',
-          'AÇO RÁPIDO',
-    ]
-    """
+ 
 
     if len(lsDetalhe)!=0 :
         bEdicao=True 
@@ -75,8 +62,8 @@ def cadastroFerramentas():
             print
             # se a planilha não existir ainda precisa de try
             try:
-               #codigo esta na primeira coluna por isso não preciso das demais
-               nItens=0 
+ 
+               nItens=8 # trazer todas as colunas devido a edição
                ls2=cData.OpenFindDateXLSX('ferramentas.xlsx','ferramentas',codigo,nItens)
                if len(ls2)>0:
 
@@ -131,13 +118,13 @@ def cadastroFerramentas():
 
         def camposValidosEdicao():
               bReturn=True
-              if existeDuplicidade(codigo,bEdicao):
+              if FerramentaAlocada(codigo):
+                       return  False
+              elif existeDuplicidade(codigo,bEdicao):
                   msg='codigo já cadastrado, verifique.'
                   msgBox(msg)
                   return  False
-
-              elif FerramentaAlocada(codigo):
-                   return  False
+ 
  
               return bReturn   
 
@@ -235,7 +222,7 @@ def cadastroFerramentas():
                resp=cData.UpdateOneXLSX('ferramentas.xlsx','ferramentas',dadosCadastro)
 
                if resp==True:
-                    messagebox.showinfo('Edição', 'Edição realizada com sucesso !')
+                    messagebox.showinfo('Edição', 'Edição realizada com sucesso !', parent=master)
                     master.destroy()
     #AKI PRODUCAO 
     master =  Toplevel()
