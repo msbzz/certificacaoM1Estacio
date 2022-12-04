@@ -110,17 +110,30 @@ Executar o arquivo main.py
    obs: no caso da remoção e edição estas deixadas para o final devido a falta de tempo.Com isso tanto a remoção como a edição 
    foram implementadas apenas no módulo de ferramentas onde para ambos os casos, é verificado se existe alguma solicitação podendo 
    a mesma se encontrar alocada ou reservada o que impedirá a operação. 
-   
-    A ideia era ter o mesmo conceito 
-        em consulta de funcionários. Já em solicitações seria uma remoção direta. No caso da edição deveria ter sido aplicado o mesmo
-        conceito de verificação de deleção em ferramentas e funcionários porem no caso das solicitaçoes campos como nome,cpf,equipe e codigo da 
-        ferramenta não estariam habilitados para edição pois são consideradas chaves estrangeiras ou seja informações que precisam existir nas
-        planilhas de ferramentas e funcionários.
-       
-
-
+    
 
 ### Video do projeto
 
 https://youtu.be/ECERHzayA5w
+
+0:07 As planilhas  
+  Apresentação das planilhas usadas nos cadastros e as de listagens
+
+1:03 Os módulos
+   Apresentação dos módulos
+
+1:44 Os cadastros 
+    Apresentação da utilização dos combos carregados em função da planilha e realização de um cadastro de funcionários apresentando a critica ao cpf
+
+3:47 As consultas
+  Apresentação da utilização dos filtros e da s listagem do conteudo do grid
+
+5:00 As solicitações 
+   Realização de um cadastro apresentado a interdependencia entre modulos de ferramentas e funcionários. Apresentação do conceito de reserva.  Utilização do filtro
+ 
+8:22 Removendo ferramentas 
+   Apresentação da interdependencia entre modulos de ferramentas e solicitações que bloqueia a remoção
+  
+9:23 Edição de ferramentas  
+   Apresentação da interdependencia entre modulos de ferramentas e solicitações que bloqueia a edição ssim como a critica a edição do codigo que leve a duplicidade.
 
